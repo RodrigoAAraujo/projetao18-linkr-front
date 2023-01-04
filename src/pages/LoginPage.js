@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { LoginForm } from "../components/LoginForm"
 
 
+
 export default function LoginPage(){
     return(
         <LoginPageStyle>
@@ -54,4 +55,4 @@ const LoginPageStyle = styled.div`
         justify-content: center;
         align-items: center;
     }
-`
+`;
