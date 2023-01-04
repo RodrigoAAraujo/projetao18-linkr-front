@@ -1,22 +1,22 @@
 import styled from "styled-components"
-import { RegisterForm } from "../components/RegisterForm"
+import { LoginForm } from "../components/LoginForm"
 
 
-export default function SignUpPage(){
+export default function LoginPage(){
     return(
-        <SignUpPageStyle>
+        <LoginPageStyle>
             <div className="title">
                 <h1>linkr</h1>
                 <h2>save, share and discover<br/>the best links on the web</h2>
             </div>
             <div className="form-wrapper">
-                <RegisterForm/>
+                <LoginForm/>
             </div>
-        </SignUpPageStyle>
+        </LoginPageStyle>
     )
 }
 
-const SignUpPageStyle = styled.div`
+const LoginPageStyle = styled.div`
     width: 100%;
     height: 100%;
 
