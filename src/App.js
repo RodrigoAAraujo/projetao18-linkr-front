@@ -1,10 +1,25 @@
+import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import { GlobalProvider } from "./components/Global";
+import { AuthContext, GlobalProvider, sessionRenew } from "./components/Global";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignupPage";
 
 function App() {
+  const [, setUser] = useContext(AuthContext)
+
+  useEffect(()=>{
+    try {
+      const getUser = JSON.parse(window.localStorage.getItem('user'))
+      if (getUser){
+        setUser(getUser)
+        sessionRenew(getUser.token)
+      }
+    } catch (error) {
+      alert(error)
+    }
+  },[])
+
   return (
     <AppStyle>
       <GlobalStyle/>

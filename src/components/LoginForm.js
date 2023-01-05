@@ -1,17 +1,39 @@
-import { useState } from "react"
-// import axios from "axios";
+import { useContext, useState } from "react"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Loading } from "./Global";
+import { apiURL, AuthContext, Loading, startSessionRenewer } from "./Global";
 import styled from "styled-components";
 
 export function LoginForm(){
     const navigate = useNavigate()
+    const [, setUser] = useContext(AuthContext);
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
-    const [load,] = useState(false)
+    const [load, setLoad] = useState(false)
 
     function submit(e){
         e.preventDefault()
+        setLoad(true)
+
+        const URL = apiURL+"signin"
+
+        const body = {
+            email,
+            pass
+        }
+        const promise = axios.post(URL, body)
+        
+        promise.then((a)=>{
+            setUser(a.data)
+            window.localStorage.setItem('user', JSON.stringify(a.data));
+            startSessionRenewer(a.data.token)
+            navigate("/timeline")
+        })
+        promise.catch((a)=>{
+            setLoad(false)
+            const msg = a.response;
+            alert(msg)
+        })
     }
 
     return(

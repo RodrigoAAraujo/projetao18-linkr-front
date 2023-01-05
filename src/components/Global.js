@@ -1,5 +1,9 @@
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
+import axios from "axios";
 import { ThreeDots } from "react-loader-spinner"
+import { useNavigate } from "react-router-dom";
+
+export const apiURL = 'http://localhost:3000/'
 
 //Pode-se criar quantos Contexts forem necessarios e manter
 //tudo simples enquanto usarmos apenas esse GlobalProvider
@@ -31,4 +35,30 @@ export const Loading = (props) => {
         ariaLabel="three-dots-loading"
         visible={true}
     />
+}
+
+export function startSessionRenewer(token){
+    setInterval(() => {
+        const URL = apiURL+"renew"
+
+        const config = {
+          headers: { "Authorization": "Bearer "+token }
+        }
+
+        const promise = axios.post(URL, {}, config)
+        
+        promise.catch((a)=>{
+            const msg = a.response;
+            alert(msg)
+            logout()
+        })
+    }, 60000);
+}
+
+export function logout(){
+    const [, setUser] = useContext(AuthContext)
+    const navigate = useNavigate()
+    setUser(false)
+    window.localStorage.removeItem("user")
+    navigate("/")
 }

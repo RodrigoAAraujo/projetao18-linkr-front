@@ -1,7 +1,7 @@
 import { useState } from "react"
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Loading } from "./Global";
+import { apiURL, Loading } from "./Global";
 import styled from "styled-components";
 
 export function RegisterForm(){
@@ -10,11 +10,30 @@ export function RegisterForm(){
     const [email, setEmail] = useState("")
     const [pass, setPass] = useState("")
     const [url, setUrl] = useState("")
-    const [load,] = useState(false)
+    const [load, setLoad] = useState(false)
 
     function submit(e){
         e.preventDefault()
+        setLoad(true)
 
+        const URL = apiURL+"signup"
+
+        const body = {
+            email,
+            username,
+            pass,
+            image_url: url
+        }
+        const promise = axios.post(URL, body)
+        
+        promise.then((a)=>{
+            navigate("/")
+        })
+        promise.catch((a)=>{
+            setLoad(false)
+            const msg = a.response;
+            alert(msg)
+        })
     }
 
     return(
