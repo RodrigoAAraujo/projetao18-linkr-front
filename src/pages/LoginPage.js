@@ -4,6 +4,7 @@ import { LoginForm } from "../components/LoginForm"
 
 
 export default function LoginPage(){
+
     return(
         <LoginPageStyle>
             <div className="title">
