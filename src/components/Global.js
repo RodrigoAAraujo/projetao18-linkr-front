@@ -1,9 +1,7 @@
-import { createContext, useContext, useState } from "react"
-import axios from "axios";
+import { createContext, useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
-import { useNavigate } from "react-router-dom";
 
-export const apiURL = 'http://localhost:3000/'
+export const apiURL = 'http://localhost:8080/'
 
 //Pode-se criar quantos Contexts forem necessarios e manter
 //tudo simples enquanto usarmos apenas esse GlobalProvider
@@ -15,7 +13,6 @@ export const AuthContext = createContext([false, () => {}])
 export const GlobalProvider = ({children}) => {
     const [user, setUser] = useState(false);
     // const [cart, setCart] = useState([]);
-
     return (
         // <CartContext.Provider value={[cart, setCart]}>
         <AuthContext.Provider value={[user, setUser]}>
@@ -35,30 +32,4 @@ export const Loading = (props) => {
         ariaLabel="three-dots-loading"
         visible={true}
     />
-}
-
-export function startSessionRenewer(token){
-    setInterval(() => {
-        const URL = apiURL+"renew"
-
-        const config = {
-          headers: { "Authorization": "Bearer "+token }
-        }
-
-        const promise = axios.post(URL, {}, config)
-        
-        promise.catch((a)=>{
-            const msg = a.response;
-            alert(msg)
-            logout()
-        })
-    }, 60000);
-}
-
-export function logout(){
-    const [, setUser] = useContext(AuthContext)
-    const navigate = useNavigate()
-    setUser(false)
-    window.localStorage.removeItem("user")
-    navigate("/")
 }

@@ -1,15 +1,15 @@
 import { useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, AuthContext, Loading, startSessionRenewer } from "./Global";
+import { apiURL, AuthContext, Loading } from "./Global";
 import styled from "styled-components";
 
 export function LoginForm(){
     const navigate = useNavigate()
-    const [, setUser] = useContext(AuthContext);
     const [email, setEmail] = useState("")
-    const [pass, setPass] = useState("")
+    const [password, setPassword] = useState("")
     const [load, setLoad] = useState(false)
+    const [, setUser] = useContext(AuthContext)
 
     function submit(e){
         e.preventDefault()
@@ -19,19 +19,18 @@ export function LoginForm(){
 
         const body = {
             email,
-            pass
+            password
         }
         const promise = axios.post(URL, body)
         
         promise.then((a)=>{
             setUser(a.data)
             window.localStorage.setItem('user', JSON.stringify(a.data));
-            startSessionRenewer(a.data.token)
-            navigate("/timeline")
+            navigate("/")
         })
         promise.catch((a)=>{
             setLoad(false)
-            const msg = a.response;
+            const msg = a.response.data;
             alert(msg)
         })
     }
@@ -49,8 +48,8 @@ export function LoginForm(){
             <input
                 type="password"
                 placeholder="Password"
-                value={pass}
-                onChange={e=> setPass(e.target.value)}
+                value={password}
+                onChange={e=> setPassword(e.target.value)}
                 required
                 disabled={load === true ? "disabled" : ""}
             />

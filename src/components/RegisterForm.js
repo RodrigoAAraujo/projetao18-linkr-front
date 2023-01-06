@@ -8,7 +8,7 @@ export function RegisterForm(){
     const navigate = useNavigate()
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
-    const [pass, setPass] = useState("")
+    const [password, setPassword] = useState("")
     const [url, setUrl] = useState("")
     const [load, setLoad] = useState(false)
 
@@ -21,7 +21,7 @@ export function RegisterForm(){
         const body = {
             email,
             username,
-            pass,
+            password,
             image_url: url
         }
         const promise = axios.post(URL, body)
@@ -31,7 +31,8 @@ export function RegisterForm(){
         })
         promise.catch((a)=>{
             setLoad(false)
-            const msg = a.response;
+            const msg = a.response.data;
+            console.log(msg)
             alert(msg)
         })
     }
@@ -57,8 +58,8 @@ export function RegisterForm(){
             <input
                 type="password"
                 placeholder="Password"
-                value={pass}
-                onChange={e=> setPass(e.target.value)}
+                value={password}
+                onChange={e=> setPassword(e.target.value)}
                 required
                 disabled={load === true ? "disabled" : ""}
             />

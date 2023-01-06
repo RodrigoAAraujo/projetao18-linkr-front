@@ -1,36 +1,54 @@
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import { AuthContext, GlobalProvider, sessionRenew } from "./components/Global";
+import { apiURL, AuthContext } from "./components/Global";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignupPage";
+import axios from "axios";
 
 function App() {
   const [, setUser] = useContext(AuthContext)
+  
 
   useEffect(()=>{
-    try {
       const getUser = JSON.parse(window.localStorage.getItem('user'))
       if (getUser){
         setUser(getUser)
-        sessionRenew(getUser.token)
+        setInterval(() => {
+          const URL = apiURL+"renew"
+          const config = {
+            headers: { "Authorization": "Bearer "+getUser.token }
+          }
+          const promise = axios.post(URL, {}, config)
+          promise.catch((a)=>{
+              const msg = a.response;
+              alert(msg)
+              Logout()
+          })
+          promise.then(()=>{
+            console.log("renovado")
+          })
+      }, 10000);
+
       }
-    } catch (error) {
-      alert(error)
-    }
   },[])
+
+  function Logout(){
+    alert("logout")
+    setUser(false)
+    window.localStorage.removeItem("user")
+    window.location.reload()
+  }
 
   return (
     <AppStyle>
       <GlobalStyle/>
-      <GlobalProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
           </Routes>
         </BrowserRouter>
-      </GlobalProvider>
     </AppStyle>
   );
 }
