@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, AuthContext, Loading } from "./Global";
+import { apiURL, AuthContext, Loading, Login } from "./Global";
 import styled from "styled-components";
 
 export function LoginForm(){
@@ -25,6 +25,7 @@ export function LoginForm(){
         
         promise.then((a)=>{
             setUser(a.data)
+            Login(a.data.token, setUser)
             window.localStorage.setItem('user', JSON.stringify(a.data));
             navigate("/")
         })

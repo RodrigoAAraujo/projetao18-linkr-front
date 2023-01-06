@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import { apiURL, AuthContext } from "./components/Global";
+import { apiURL, AuthContext, Login } from "./components/Global";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignupPage";
 import axios from "axios";
@@ -14,31 +14,9 @@ function App() {
       const getUser = JSON.parse(window.localStorage.getItem('user'))
       if (getUser){
         setUser(getUser)
-        setInterval(() => {
-          const URL = apiURL+"renew"
-          const config = {
-            headers: { "Authorization": "Bearer "+getUser.token }
-          }
-          const promise = axios.post(URL, {}, config)
-          promise.catch((a)=>{
-              const msg = a.response;
-              alert(msg)
-              Logout()
-          })
-          promise.then(()=>{
-            console.log("renovado")
-          })
-      }, 10000);
-
+        Login(getUser.token, setUser)
       }
   },[])
-
-  function Logout(){
-    alert("logout")
-    setUser(false)
-    window.localStorage.removeItem("user")
-    window.location.reload()
-  }
 
   return (
     <AppStyle>

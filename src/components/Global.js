@@ -1,5 +1,6 @@
 import { createContext, useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
+import axios from "axios"
 
 export const apiURL = 'http://localhost:8080/'
 
@@ -32,4 +33,29 @@ export const Loading = (props) => {
         ariaLabel="three-dots-loading"
         visible={true}
     />
+}
+
+export function Login(token, _setUser){
+    setInterval(() => {
+      const URL = apiURL+"renew"
+      const config = {
+        headers: { "Authorization": "Bearer "+token }
+      }
+      const promise = axios.post(URL, {}, config)
+      promise.catch((a)=>{
+          const msg = a.response.data;
+          alert(msg)
+          Logout(_setUser)
+      })
+      promise.then(()=>{
+        console.log("renovado")
+      })
+  }, 10000);
+}
+
+export function Logout(_setUser){
+alert("logout")
+_setUser(false)
+window.localStorage.removeItem("user")
+window.location.reload()
 }
