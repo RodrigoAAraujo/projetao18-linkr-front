@@ -44,8 +44,8 @@ export function Login(token, _setUser){
       const promise = axios.post(URL, {}, config)
       promise.catch((a)=>{
           const msg = a.response.data;
-          alert(msg)
-          Logout(_setUser)
+          //alert(msg)
+          //Logout(_setUser)
       })
       promise.then(()=>{
         console.log("renovado")
