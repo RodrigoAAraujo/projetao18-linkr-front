@@ -7,6 +7,7 @@ import HeaderNavigation from "./components/HeaderNavigation.js";
 import HomePage from "./pages/HomePage.js";
 import SignUpPage from "./pages/SignupPage.js";
 import axios from "axios";
+import UsersPosts from "./pages/UsersPosts.js";
 
 function App() {
   const [, setUser] = useContext(AuthContext)
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/users/:id" element={<UsersPosts/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>
