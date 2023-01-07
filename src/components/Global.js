@@ -3,7 +3,7 @@ import { ThreeDots } from "react-loader-spinner"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-export const apiURL = 'http://localhost:4002/'
+export const apiURL = 'http://localhost:8080/'
 
 //Pode-se criar quantos Contexts forem necessarios e manter
 //tudo simples enquanto usarmos apenas esse GlobalProvider

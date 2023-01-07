@@ -1,34 +1,39 @@
+//HeaderNavigation sem a search bar
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
-import {Logout} from "./Global.js"
-import SearchBar from "./SearchBar.js"
-import { BiChevronUp, BiChevronDown } from "react-icons/bi/index.esm.js";
+import { BackendLink } from "../settings/urls.js"
+import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "./Global.js"
+import SearchBar from "./SearchBar.js"
 
-export default function HeaderNavigation(){
-    const [logoutOn, setLogoutOn] = useState(false)
+export default function Header(){
+    const [logout, setLogout] = useState(false)
     const navigate = useNavigate()
-    const [user, setUser] = useContext(AuthContext)
+
+    //const user = localStorage.getItem("user")
+
+    function logoutAction(){
+
+    }
 
     return(
-        <HeaderStyle logout={logoutOn}>
+        <HeaderStyle logout={logout}>
             <section>
                 <h1 onClick={() => navigate("/timeline")}>linkr</h1>
-                <SearchBar></SearchBar>
-                <div className="user" onClick={() => setLogoutOn(!logoutOn)}>
-                    {logoutOn?
+                
+                <div className="user" onClick={() => setLogout(!logout)}>
+                    {logout?
                         <BiChevronUp/>:
                         <BiChevronDown/>
                     }
                     
 
-                    <img src={user.image_url}/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU"/>
                 </div>
             </section>
-            <section className="logout" onClick={() => Logout(setUser)}>
-                <h2>Logout</h2>
+            <section className="logout">
+                <h2 onClick={() => logoutAction()}>Logout</h2>
             </section>
         </HeaderStyle>
     )
@@ -47,7 +52,7 @@ const HeaderStyle = styled.header`
     position: relative;
 
     @media (max-width: 600px){
-        margin-bottom: 65px;
+        margin-bottom: 10px;
     }
 
     h1{
