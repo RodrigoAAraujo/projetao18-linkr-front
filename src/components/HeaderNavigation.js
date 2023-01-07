@@ -29,8 +29,8 @@ export default function HeaderNavigation(){
                     <img src={user.image_url}/>
                 </div>
             </section>
-            <section className="logout">
-                <h2 onClick={() => Logout(setUser)}>Logout</h2>
+            <section className="logout" onClick={() => Logout(setUser)}>
+                <h2>Logout</h2>
             </section>
         </HeaderStyle>
     )

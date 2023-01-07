@@ -12,7 +12,7 @@ export default function HomePage(){
     const [user,] = useContext(AuthContext);
 
     if (user === false){
-        return <LoginPage/>
+        navigate("/")
     }
 
     return(

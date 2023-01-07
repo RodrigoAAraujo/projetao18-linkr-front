@@ -27,7 +27,7 @@ export function LoginForm(){
             setUser(a.data)
             Login(a.data.token, setUser)
             window.localStorage.setItem('user', JSON.stringify(a.data));
-            navigate("/")
+            navigate("/timeline")
         })
         promise.catch((a)=>{
             setLoad(false)
