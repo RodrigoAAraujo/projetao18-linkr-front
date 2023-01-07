@@ -2,8 +2,13 @@ import HeaderNavigation from "../components/HeaderNavigation.js";
 import UserInfo from "../components/UserInfo.js";
 import styled from "styled-components";
 import Post from "../components/Post.js";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../components/Global.js";
 
 export default function UsersPosts() {
+    const navigate = useNavigate()
+    const [user] = useContext(AuthContext)
 
     const UserPosts =
     {
