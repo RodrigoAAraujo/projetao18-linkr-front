@@ -13,7 +13,7 @@ export default function UsersPosts(){
             },
             posts:[
                 {
-                    link: "https://discord.com/",
+                    link: "https://www.whatsapp.com/?lang=pt_br",
                     comentary: "Olha essa plataforma que legal #discord",
                     likes: "123",
                     liked: true
@@ -27,14 +27,16 @@ export default function UsersPosts(){
         <>
             <HeaderNavigation/>
             <UsersPostsDisplay>
-                <UserInfo photo={UserPosts.user.image_url} name={UserPosts.user.username}/>
-                <div className="interactions">
-                    <div className="posts">
-                        {UserPosts.posts.map((p) => <Post postInfo ={p} userInfo={UserPosts.user}/>)} 
+                <div className="container">
+                    <UserInfo photo={UserPosts.user.image_url} name={UserPosts.user.username}/>
+                    <div className="interactions">
+                        <div className="posts">
+                            {UserPosts.posts.map((p) => <Post postInfo ={p} userInfo={UserPosts.user}/>)} 
 
-                    </div>
-                    <div>
+                        </div>
+                        <div>
 
+                        </div>
                     </div>
                 </div>
             </UsersPostsDisplay>
@@ -44,9 +46,18 @@ export default function UsersPosts(){
 
 const UsersPostsDisplay = styled.main`
     margin-top: 60px;
+    display: flex;
+    justify-content: center;
 
     .interactions{
-        margin-top: 48px;
+        margin-top: 30px;
+    }
+
+    .container{
+        max-width: 1000px;
+    }
+    .posts{
+        width: 70%;
     }
 
 `

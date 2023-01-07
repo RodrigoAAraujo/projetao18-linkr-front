@@ -19,7 +19,7 @@ export default function SearchBar(){
         if(userInput !== ""){
             axios.get(`${BackendLink}users/${userInput}`, {headers: {Authorization: `Bearer ${user.token}`}})
                 .then(res =>{
-                    setUsers(res.data)
+                    res.data.map((u) => u.user)
                 })
                 .catch(err =>{
                     console.log(err)

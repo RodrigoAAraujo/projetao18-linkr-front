@@ -13,10 +13,11 @@ export default function UserInfo({photo, name}){
 
 const UserInfoStyle = styled.div`
     display: flex;
+    align-items: center;
 
     img{
         width: 50px;
-        aspect-ratio: 1;
+        height: 50px;
         object-fit: cover;
         border-radius: 50%;
         margin-right: 18px;
