@@ -1,12 +1,13 @@
+//HeaderNavigation sem a search bar
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import { BackendLink } from "../settings/urls.js"
-import SearchBar from "./SearchBar.js"
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { useNavigate } from "react-router-dom"
+import SearchBar from "./SearchBar.js"
 
-export default function HeaderNavigation(){
+export default function Header(){
     const [logout, setLogout] = useState(false)
     const navigate = useNavigate()
 
@@ -20,7 +21,7 @@ export default function HeaderNavigation(){
         <HeaderStyle logout={logout}>
             <section>
                 <h1 onClick={() => navigate("/timeline")}>linkr</h1>
-                <SearchBar></SearchBar>
+                
                 <div className="user" onClick={() => setLogout(!logout)}>
                     {logout?
                         <BiChevronUp/>:
@@ -51,7 +52,7 @@ const HeaderStyle = styled.header`
     position: relative;
 
     @media (max-width: 600px){
-        margin-bottom: 65px;
+        margin-bottom: 10px;
     }
 
     h1{

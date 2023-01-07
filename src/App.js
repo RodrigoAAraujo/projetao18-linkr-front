@@ -6,6 +6,7 @@ import { GlobalProvider } from "./components/Global.js";
 import HeaderNavigation from "./components/HeaderNavigation.js";
 import HomePage from "./pages/HomePage.js";
 import SignUpPage from "./pages/SignupPage.js";
+import Timeline from "./pages/Timeline.js"
 import axios from "axios";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/timeline" element={<Timeline/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>

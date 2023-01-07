@@ -2,7 +2,7 @@ import { createContext, useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
 import axios from "axios"
 
-export const apiURL = 'http://localhost:8080/'
+export const apiURL = 'http://localhost:5000/'
 
 //Pode-se criar quantos Contexts forem necessarios e manter
 //tudo simples enquanto usarmos apenas esse GlobalProvider
