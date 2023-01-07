@@ -1,38 +1,34 @@
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
-import { BackendLink } from "../settings/urls.js"
+import {Logout} from "./Global.js"
 import SearchBar from "./SearchBar.js"
-import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { BiChevronUp, BiChevronDown } from "react-icons/bi/index.esm.js";
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "./Global.js"
 
 export default function HeaderNavigation(){
-    const [logout, setLogout] = useState(false)
+    const [logoutOn, setLogoutOn] = useState(false)
     const navigate = useNavigate()
-
-    //const user = localStorage.getItem("user")
-
-    function logoutAction(){
-
-    }
+    const [user, setUser] = useContext(AuthContext)
 
     return(
-        <HeaderStyle logout={logout}>
+        <HeaderStyle logout={logoutOn}>
             <section>
                 <h1 onClick={() => navigate("/timeline")}>linkr</h1>
                 <SearchBar></SearchBar>
-                <div className="user" onClick={() => setLogout(!logout)}>
-                    {logout?
+                <div className="user" onClick={() => setLogoutOn(!logoutOn)}>
+                    {logoutOn?
                         <BiChevronUp/>:
                         <BiChevronDown/>
                     }
                     
 
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU"/>
+                    <img src={user.image_url}/>
                 </div>
             </section>
-            <section className="logout">
-                <h2 onClick={() => logoutAction()}>Logout</h2>
+            <section className="logout" onClick={() => Logout(setUser)}>
+                <h2>Logout</h2>
             </section>
         </HeaderStyle>
     )

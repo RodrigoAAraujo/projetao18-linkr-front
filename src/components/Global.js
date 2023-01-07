@@ -1,8 +1,9 @@
 import { createContext, useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
-export const apiURL = 'http://localhost:5000/'
+export const apiURL = 'http://localhost:8080/'
 
 //Pode-se criar quantos Contexts forem necessarios e manter
 //tudo simples enquanto usarmos apenas esse GlobalProvider
@@ -54,8 +55,9 @@ export function Login(token, _setUser){
 }
 
 export function Logout(_setUser){
-alert("logout")
-_setUser(false)
-window.localStorage.removeItem("user")
-window.location.reload()
+  alert("logout")
+  _setUser(false)
+  window.localStorage.removeItem("user")
+  const navigate = useNavigate()
+  navigate("/")
 }

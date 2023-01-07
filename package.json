@@ -2,6 +2,7 @@
   "name": "projetao18-linkr-front",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -15,6 +16,7 @@
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
+    "react-tagify": "^0.1.4",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },

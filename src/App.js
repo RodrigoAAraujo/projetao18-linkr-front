@@ -8,6 +8,8 @@ import HomePage from "./pages/HomePage.js";
 import SignUpPage from "./pages/SignupPage.js";
 import Timeline from "./pages/Timeline.js"
 import axios from "axios";
+import UsersPosts from "./pages/UsersPosts.js";
+import LoginPage from "./pages/LoginPage.js";
 
 function App() {
   const [, setUser] = useContext(AuthContext)
@@ -26,9 +28,9 @@ function App() {
       <GlobalStyle/>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage/>}/>
+            <Route path="/" element={<LoginPage/>}/>
+            <Route path="/timeline" element={<HomePage/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/timeline" element={<Timeline/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>
