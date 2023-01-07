@@ -3,35 +3,39 @@ import UserInfo from "../components/UserInfo.js";
 import styled from "styled-components";
 import Post from "../components/Post.js";
 
-export default function UsersPosts(){
+export default function UsersPosts() {
 
     const UserPosts =
-        {
-            user:{
-                username: "Pablo",
-                image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhze-QNnca2liBrhRj4CjswGZSkqbhvSDJsQ&usqp=CAU"
-            },
-            posts:[
-                {
-                    link: "https://www.whatsapp.com/?lang=pt_br",
-                    comentary: "Olha essa plataforma que legal #discord",
-                    likes: "123",
-                    liked: true
-                }
-            ]
-    
-        }
-    
+    {
+        user: {
+            username: "Pablo",
+            image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhze-QNnca2liBrhRj4CjswGZSkqbhvSDJsQ&usqp=CAU"
+        },
+        posts: [
+            {
+                link: "https://www.whatsapp.com/?lang=pt_br",
+                comentary: "Olha essa plataforma que legal #discord",
+                likes: "123",
+                liked: true
+            }
+        ]
 
-    return(
+    }
+
+    if (user === false) {
+        navigate("/")
+    }
+
+
+    return (
         <>
-            <HeaderNavigation/>
+            <HeaderNavigation />
             <UsersPostsDisplay>
                 <div className="container">
-                    <UserInfo photo={UserPosts.user.image_url} name={UserPosts.user.username}/>
+                    <UserInfo photo={UserPosts.user.image_url} name={UserPosts.user.username} />
                     <div className="interactions">
                         <div className="posts">
-                            {UserPosts.posts.map((p) => <Post postInfo ={p} userInfo={UserPosts.user}/>)} 
+                            {UserPosts.posts.map((p) => <Post postInfo={p} userInfo={UserPosts.user} />)}
 
                         </div>
                         <div>
