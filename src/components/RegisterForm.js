@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, Loading } from "./Global";
+import { apiURL, Loading } from "./Global.js";
 import styled from "styled-components";
 
 export function RegisterForm(){

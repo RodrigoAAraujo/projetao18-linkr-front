@@ -1,25 +1,25 @@
 import styled from "styled-components"
-import { IoSearchOutline} from "react-icons/io5";
+import { IoSearchOutline} from "react-icons/io5/index.esm.js";
 import {DebounceInput} from 'react-debounce-input';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BackendLink } from "../settings/urls";
+import { BackendLink } from "../settings/urls.js";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./Global.js";
+import { useContext } from "react";
 
 export default function SearchBar(){
     const [userInput,  setUserInput] = useState("")
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
+    const [user] = useContext(AuthContext)
 
-    //const user = localStorage.getItem("user")
-    console.log(userInput)
 
     useEffect(() =>{
         if(userInput !== ""){
-            axios.get(`${BackendLink}users/${userInput}`, {headers: {Authorization: `Bearer ${/*user.token*/users}`}})
+            axios.get(`${BackendLink}users/${userInput}`, {headers: {Authorization: `Bearer ${user.token}`}})
                 .then(res =>{
                     setUsers(res.data)
-                    console.log(res.data)
                 })
                 .catch(err =>{
                     console.log(err)
@@ -32,7 +32,6 @@ export default function SearchBar(){
 
     function goToUserPage(e){
         e.preventDefault()
-        console.log(users)
         if(users.length !== 0) {
             navigate(`/users/${users[0].id}`)
         }
@@ -51,18 +50,21 @@ export default function SearchBar(){
                     <IoSearchOutline />
                 </button>
             </form>
-            {users.length === 0? null : <UsersDisplay users={users}/>}
+            {users.length === 0? null : <UsersDisplay users={users} input={setUserInput}/>}
         </SearchBarStyle>
     )
 }
 
-function UsersDisplay({users}){
+function UsersDisplay({users, input}){
     const navigate = useNavigate()
     
     return(
         <UsersDisplayStyle>
             {users.map((u) => 
-                <div onClick={() => navigate(`/users/${u.id}`)}>
+                <div onClick={() => {
+                    navigate(`/users/${u.id}`); 
+                    input("")
+                }}>
                     <img src={u.image_url}/>
                     <h2>{u.username}</h2>
                 </div>

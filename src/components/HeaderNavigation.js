@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import {Logout} from "./Global.js"
 import SearchBar from "./SearchBar.js"
-import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { BiChevronUp, BiChevronDown } from "react-icons/bi/index.esm.js";
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "./Global.js"
 
@@ -11,8 +11,6 @@ export default function HeaderNavigation(){
     const [logoutOn, setLogoutOn] = useState(false)
     const navigate = useNavigate()
     const [user, setUser] = useContext(AuthContext)
-
-    //const user = localStorage.getItem("user")
 
     return(
         <HeaderStyle logout={logoutOn}>

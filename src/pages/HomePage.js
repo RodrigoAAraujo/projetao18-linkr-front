@@ -1,10 +1,10 @@
 import { useContext } from "react"
 import styled from "styled-components";
-import { AuthContext } from "../components/Global"
-import LoginPage from "./LoginPage";
+import { AuthContext } from "../components/Global.js"
+import LoginPage from "./LoginPage.js";
 import ReactHashtag from "react-hashtag";
 import { useNavigate } from "react-router-dom";
-import HeaderNavigation from "../components/HeaderNavigation";
+import HeaderNavigation from "../components/HeaderNavigation.js";
 
 
 export default function HomePage(){

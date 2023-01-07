@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, AuthContext, Loading, Login } from "./Global";
+import { apiURL, AuthContext, Loading, Login } from "./Global.js";
 import styled from "styled-components";
 
 export function LoginForm(){
