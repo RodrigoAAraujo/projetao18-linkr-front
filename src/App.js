@@ -6,6 +6,7 @@ import { GlobalProvider } from "./components/Global.js";
 import HeaderNavigation from "./components/HeaderNavigation.js";
 import HomePage from "./pages/HomePage.js";
 import SignUpPage from "./pages/SignupPage.js";
+import Timeline from "./pages/Timeline.js"
 import axios from "axios";
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
@@ -28,9 +29,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginPage/>}/>
-            <Route path="/timeline" element={<HomePage/>}/>
+            <Route path="/timeline" element={<Timeline/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/users/:id" element={<UsersPosts/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>
