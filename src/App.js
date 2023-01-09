@@ -1,12 +1,6 @@
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-<<<<<<< HEAD
-import { GlobalProvider } from "./components/Global";
-import LikeButton from "./components/LikeButton";
-import HomePage from "./pages/HomePage";
-import SignUpPage from "./pages/SignupPage";
-=======
 import { apiURL, AuthContext, Login } from "./components/Global.js";
 import { GlobalProvider } from "./components/Global.js";
 import HeaderNavigation from "./components/HeaderNavigation.js";
@@ -16,7 +10,8 @@ import Timeline from "./pages/Timeline.js"
 import axios from "axios";
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
->>>>>>> 4b1cd4fdeb6f24af291f30b9f7fc6eb7039904d1
+import LikeButton from "./components/LikeButton.js";
+
 
 function App() {
   const [, setUser] = useContext(AuthContext)
