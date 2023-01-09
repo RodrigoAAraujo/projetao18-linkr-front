@@ -3,20 +3,25 @@ import HeaderNavigation from "../components/HeaderNavigation.js"
 import Posts from "../components/Posts.js"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useContext, authContext } from "react"
-
+import { useContext } from "react"
+import { AuthContext } from "../components/Global.js"
+import axios from "axios";
 
 export default function Timeline() {
 
+    //const [user] = useContext(AuthContext)
+
     const [boolPublish, setBoolPublish] = useState(false)
-    const [form, setForm] = useState({ value: "", description: "", bool: true })
+    const [form, setForm] = useState({ link: "", comentary: ""})
     const navigate = useNavigate();
 
     function handleForm(e) {
         const { name, value } = e.target
         setForm({ ...form, [name]: value })
-        
     }
+
+    //console.log(user, "user")
+
 
     return (
         <>
@@ -28,11 +33,13 @@ export default function Timeline() {
                     <Title>timeline</Title>
                     <PostagemUsuario>
                         <EnglobaFotoUsuario> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU" /> </EnglobaFotoUsuario>
-                        <EnglobaForm>
+                        <EnglobaForm >
                             <div>What are you going to share today?</div>
-                            <LinkInput placeholder="http://..." />
-                            <DescricaoInput placeholder="Awesome article about #javascript" />
-                            <PublishButton disabled={boolPublish}>Publish</PublishButton>
+                            <LinkInput placeholder="http://..." required name="link" onChange={handleForm}/>
+                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={handleForm}/>
+                            <PublishButton type="submit" disabled={boolPublish}>
+                                {(boolPublish === false) ? "Publicar" : "Publicando..."}
+                            </PublishButton>
                         </EnglobaForm>
                     </PostagemUsuario>
                     
@@ -96,7 +103,6 @@ img{
     display: none;
 }
 `
-
 const EnglobaForm = styled.form`
 display: flex;
 flex-direction: column;

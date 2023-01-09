@@ -1,13 +1,23 @@
 import styled from "styled-components"
-import {AiOutlineHeart} from "react-icons/ai"
+import {AiOutlineHeart, AiFillHeart} from "react-icons/ai/index.esm.js"
+import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+
 
 export default function Posts(){
+
+    const [boolLike, setBoolLike] = useState(false)
+
+    function mudaLike(){
+        setBoolLike(!boolLike)
+    }
 
     return (
         <ContainerPost>
             <EnglobaFotoUsuarioPost>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU" />
-                <AiOutlineHeart className="vazio"/>
+                {(boolLike === false) ? <AiOutlineHeart onClick={mudaLike} className="vazio"/> : <AiFillHeart onClick={mudaLike} className="cheio"/>};
+                <p>10 likes</p>
             </EnglobaFotoUsuarioPost>
             <ConteudoPostagem>
                 <NomeUsuario>Nome do usuario que postou</NomeUsuario>
@@ -39,11 +49,22 @@ img{
 }
 .vazio{
     color: white;
-    margin-top: 12px;
+    margin-top: 15px;
     font-size: 20px;
+    cursor: pointer;
+}
+.cheio{
+    color: red;
+    margin-top: 15px;
+    font-size: 20px;
+    cursor: pointer;
 }
 p{
-    
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    color: #FFFFFF;
 }
 `
 const ContainerPost = styled.div`
