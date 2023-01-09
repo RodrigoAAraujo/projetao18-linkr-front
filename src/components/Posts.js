@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {AiOutlineHeart} from "react-icons/ai"
+import {AiOutlineHeart} from "react-icons/ai/index.esm.js"
 
 export default function Posts(){
 
