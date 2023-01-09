@@ -18,6 +18,8 @@ export default function Post({ postInfo, userInfo }) {
         cursor: 'pointer'
     };
 
+    console.log(postInfo)
+
     useEffect(()=>{
         const body ={
             link: postInfo.link
@@ -28,7 +30,7 @@ export default function Post({ postInfo, userInfo }) {
             .catch(err => console.log(err))
 
         console.log(linkMeta)
-    },[])
+    },[postInfo])
 
 
     return (
