@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { RegisterForm } from "../components/RegisterForm"
+import { RegisterForm } from "../components/RegisterForm.js"
 
 
 export default function SignUpPage(){

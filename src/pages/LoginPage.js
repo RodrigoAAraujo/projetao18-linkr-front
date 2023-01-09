@@ -1,9 +1,8 @@
 import styled from "styled-components"
-import { LoginForm } from "../components/LoginForm"
-
-
+import { LoginForm } from "../components/LoginForm.js"
 
 export default function LoginPage(){
+
     return(
         <LoginPageStyle>
             <div className="title">

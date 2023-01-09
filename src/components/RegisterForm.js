@@ -1,20 +1,40 @@
 import { useState } from "react"
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Loading } from "./Global";
+import { apiURL, Loading } from "./Global.js";
 import styled from "styled-components";
 
 export function RegisterForm(){
     const navigate = useNavigate()
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
-    const [pass, setPass] = useState("")
+    const [password, setPassword] = useState("")
     const [url, setUrl] = useState("")
-    const [load,] = useState(false)
+    const [load, setLoad] = useState(false)
 
     function submit(e){
         e.preventDefault()
+        setLoad(true)
 
+        const URL = apiURL+"signup"
+
+        const body = {
+            email,
+            username,
+            password,
+            image_url: url
+        }
+        const promise = axios.post(URL, body)
+        
+        promise.then((a)=>{
+            navigate("/")
+        })
+        promise.catch((a)=>{
+            setLoad(false)
+            const msg = a.response.data;
+            console.log(msg)
+            alert(msg)
+        })
     }
 
     return(
@@ -38,8 +58,8 @@ export function RegisterForm(){
             <input
                 type="password"
                 placeholder="Password"
-                value={pass}
-                onChange={e=> setPass(e.target.value)}
+                value={password}
+                onChange={e=> setPassword(e.target.value)}
                 required
                 disabled={load === true ? "disabled" : ""}
             />
