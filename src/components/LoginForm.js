@@ -30,9 +30,7 @@ export function LoginForm(){
             navigate("/timeline")
         })
         promise.catch((a)=>{
-            setLoad(false)
-            const msg = a.response.data;
-            alert(msg)
+            console.log(a)
         })
     }
 
