@@ -10,6 +10,8 @@ import Timeline from "./pages/Timeline.js"
 import axios from "axios";
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
+import LikeButton from "./components/LikeButton.js";
+
 
 function App() {
   const [, setUser] = useContext(AuthContext)
@@ -31,6 +33,7 @@ function App() {
             <Route path="/" element={<LoginPage/>}/>
             <Route path="/timeline" element={<Timeline/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/test" element={<LikeButton/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>
