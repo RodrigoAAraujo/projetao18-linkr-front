@@ -134,7 +134,6 @@ height: 40px;
 background: #EFEFEF;
 border-radius: 5px;
 border: none;
-shadow-box: none;
 padding-left: 2%;
 margin-top: 2%;
 ::placeholder,
@@ -159,7 +158,6 @@ height: 100px;
 background: #EFEFEF;
 border-radius: 5px;
 border: none;
-shadow-box: none;
 padding-top: 2%;
 padding-left: 2%;
 margin-top: 1%;
