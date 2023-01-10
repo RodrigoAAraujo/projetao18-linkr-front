@@ -1,29 +1,78 @@
 import styled from "styled-components"
-import {AiOutlineHeart} from "react-icons/ai/index.esm.js"
+import { useEffect, useState } from "react"
+import {AiOutlineHeart ,AiFillHeart} from "react-icons/ai/index.esm.js"
+import axios from 'axios'
+import LikeButton from "./LikeButton.js"
 
-export default function Posts(){
+export default function Posts(props){
 
-    return (
-        <ContainerPost>
-            <EnglobaFotoUsuarioPost>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU" />
-                <AiOutlineHeart className="vazio"/>
-            </EnglobaFotoUsuarioPost>
-            <ConteudoPostagem>
-                <NomeUsuario>Nome do usuario que postou</NomeUsuario>
-                <DescricaoPost>Descrição do post - Muito maneiro esse tutorial de Material UI com React, deem uma olhada!</DescricaoPost>
-                <EnglobaConteudoLink onClick>
-                    <EnglobaTextosLink>
-                        <TituloLink>Como aplicar o Material UI em um projeto React</TituloLink>
-                        <DescricaoLink>Hey! I have moved this tutorial to my personal blog. Same content, new location. Sorry about making you click through to another page.</DescricaoLink>
-                        <Link>https://medium.com/@pshrmn/a-simple-react-router</Link>
-                    </EnglobaTextosLink>
-                    <ImagemLink> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU" /> </ImagemLink>
-                </EnglobaConteudoLink>
-            </ConteudoPostagem>
-        </ContainerPost>
-    )
+    const [boolLike, setBoolLike] = useState(false)
+    const [resposta, setResposta] = useState('')
 
+    function mudaLike(){
+        setBoolLike(!boolLike)
+    }
+
+    useEffect(() => {
+
+        const URL = "http://localhost:8080/timeline"
+    
+        //adaptar config pra receber o token correto
+        const config = {
+          headers: {
+            Authorization: `Bearer tokenpadrao`
+          }
+        }
+        const requisicao = axios.get(URL, config);
+    
+        //ainda falta colocar a verificaçao do token
+        console.log("OPAAA")
+        requisicao.then((res) => {
+          setResposta(res.data)
+          console.log(res.data, "resposta do servidor no get /posts", resposta)
+        });
+    
+        requisicao.catch((err) => {
+          console.log("deu erro!")
+          console.log(err)
+        })
+    
+      }, []);
+
+      console.log(resposta)
+
+      if(resposta !== ''){
+
+          return (
+
+              resposta.map(item =>
+                  <ContainerPost>
+                      <EnglobaFotoUsuarioPost>
+                          <img src={item.img} />
+                          <LikeButton/>
+                      </EnglobaFotoUsuarioPost>
+                      <ConteudoPostagem>
+                          <NomeUsuario>{item.username}</NomeUsuario>
+                          <DescricaoPost>{item.comentary}</DescricaoPost>
+                          <EnglobaConteudoLink onClick>
+                              <EnglobaTextosLink>
+                                  <TituloLink>{item.metadata.title}</TituloLink>
+                                  <DescricaoLink>{item.metadata.description}</DescricaoLink>
+                                  <Link>{item.metadata.url}</Link>
+                              </EnglobaTextosLink>
+                              <ImagemLink> <img src={item.metadata.image} /> </ImagemLink>
+                          </EnglobaConteudoLink>
+                      </ConteudoPostagem>
+                  </ContainerPost>
+              )
+
+
+          )
+
+      }
+    
+
+    
 }
 
 const EnglobaFotoUsuarioPost = styled.div`
@@ -39,11 +88,22 @@ img{
 }
 .vazio{
     color: white;
-    margin-top: 12px;
+    margin-top: 15px;
     font-size: 20px;
+    cursor: pointer;
+}
+.cheio{
+    color: red;
+    margin-top: 15px;
+    font-size: 20px;
+    cursor: pointer;
 }
 p{
-    
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    color: #FFFFFF;
 }
 `
 const ContainerPost = styled.div`

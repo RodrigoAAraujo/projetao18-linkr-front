@@ -16,7 +16,7 @@ export default function LikeButton(props){
     const postId = 2;
 
     //esse token virá do local storage ou do context
-    const token = "4fa5a482-ccd5-498b-ad57-c1f52ff8db45";
+    const token = "tokenpadrao";
 
     useEffect(() => {
         if(!token){
@@ -40,6 +40,7 @@ export default function LikeButton(props){
     }
 
     function like(){
+        console.log(postId)
         if(liked === false){
             const promise = axios.post(`${urlAPI}posts/like/${postId}`, 
             {}, {headers: {
@@ -51,7 +52,9 @@ export default function LikeButton(props){
 
         }
         else{
+            console.log(postId)
             const promise = axios.delete(`${urlAPI}posts/removelike/${postId}`, 
+            
             {headers: {
                 "Authorization": `Bearer ${token}`
             }})
@@ -63,12 +66,13 @@ export default function LikeButton(props){
 
     function tooltipMessage(){
         if(liked){
+            console.log(listLikes, "list likes")
             const newArray = listLikes.filter(i => i.id !== userId)
             switch(listLikes.length){
                 case 1:
                     return(<p>Você</p>)
                 case 2:
-                    return(<p>Você e newArray[0].username</p>)
+                    return(<p>Você e {newArray[0].username}</p>)
                 case 3:
                     return(<p>Você, {newArray[0].username} e outra pessoa</p>)
                 default:
