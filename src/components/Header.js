@@ -3,7 +3,7 @@ import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import { BackendLink } from "../settings/urls.js"
-import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { BiChevronUp, BiChevronDown } from "react-icons/index.esm.js";
 import { useNavigate } from "react-router-dom"
 import SearchBar from "./SearchBar.js"
 

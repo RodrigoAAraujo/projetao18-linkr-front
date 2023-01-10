@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import HeaderNavigation from "../components/HeaderNavigation.js"
 import Posts from "../components/Posts.js"
+import Post from "../components/Post.js"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
@@ -12,6 +13,8 @@ export default function Timeline() {
     //const [user] = useContext(AuthContext)
 
     const [boolPublish, setBoolPublish] = useState(false)
+    const [atualizador, setAtualizador] = useState(0)
+    const [resposta, setResposta] = useState('')
     const [form, setForm] = useState({ link: "", comentary: ""})
     const navigate = useNavigate();
 
@@ -43,7 +46,7 @@ export default function Timeline() {
                         </EnglobaForm>
                     </PostagemUsuario>
                     
-                   <Posts/>
+                   <Posts resposta = {resposta}/>
 
                 </EnglobaConteudo>
             </Container>
