@@ -41,6 +41,10 @@ export default function Timeline() {
 
     }
 
+    if(user === false){
+        navigate("/")
+    }
+
 
     console.log(resposta)
     return (

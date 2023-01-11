@@ -45,8 +45,9 @@ export default function UsersPosts() {
         }
     }, [])
 
-
-    console.log(UserPosts)
+    if(user === false){
+        navigate("/")
+    }
 
     return (
         <>
