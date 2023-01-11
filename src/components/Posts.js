@@ -42,9 +42,7 @@ export default function Posts(props){
       console.log(resposta)
 
       if(resposta !== ''){
-
           return (
-
               resposta.map(item =>
                   <ContainerPost>
                       <EnglobaFotoUsuarioPost>
