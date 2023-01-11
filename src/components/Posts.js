@@ -26,7 +26,7 @@ export default function Posts(props){
         const requisicao = axios.get(URL, config);
     
         //ainda falta colocar a verificaçao do token
-        console.log("OPAAA")
+        
         requisicao.then((res) => {
           setResposta(res.data)
           console.log(res.data, "resposta do servidor no get /posts", resposta)
@@ -39,7 +39,7 @@ export default function Posts(props){
     
       }, []);
 
-      console.log(resposta)
+      console.log(resposta, "resposta")
 
       if(resposta !== ''){
           return (
@@ -47,7 +47,7 @@ export default function Posts(props){
                   <ContainerPost>
                       <EnglobaFotoUsuarioPost>
                           <img src={item.img} />
-                          <LikeButton/>
+                          <LikeButton postId={item.id}/>
                       </EnglobaFotoUsuarioPost>
                       <ConteudoPostagem>
                           <NomeUsuario>{item.username}</NomeUsuario>

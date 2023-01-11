@@ -13,7 +13,7 @@ export default function LikeButton(props){
     const [listLikes, setListLikes] = useState([]);
     const [userId, setUserId] = useState(0);
     const navigate = useNavigate();
-    const postId = 2;
+    
 
     //esse token virá do local storage ou do context
     const token = "tokenpadrao";
@@ -27,7 +27,7 @@ export default function LikeButton(props){
       }, [])
 
     function verifyLike(){
-        const promise = axios.get(`${urlAPI}posts/likes/${postId}`,
+        const promise = axios.get(`${urlAPI}posts/likes/${props.postId}`,
         {headers: {
             "Authorization": `Bearer ${token}`
         }});
@@ -40,9 +40,9 @@ export default function LikeButton(props){
     }
 
     function like(){
-        console.log(postId)
+        
         if(liked === false){
-            const promise = axios.post(`${urlAPI}posts/like/${postId}`, 
+            const promise = axios.post(`${urlAPI}posts/like/${props.postId}`, 
             {}, {headers: {
                 "Authorization": `Bearer ${token}`
             }})
@@ -52,8 +52,8 @@ export default function LikeButton(props){
 
         }
         else{
-            console.log(postId)
-            const promise = axios.delete(`${urlAPI}posts/removelike/${postId}`, 
+            
+            const promise = axios.delete(`${urlAPI}posts/removelike/${props.postId}`, 
             
             {headers: {
                 "Authorization": `Bearer ${token}`
@@ -65,32 +65,38 @@ export default function LikeButton(props){
     };
 
     function tooltipMessage(){
-        if(liked){
-            console.log(listLikes, "list likes")
-            const newArray = listLikes.filter(i => i.id !== userId)
-            switch(listLikes.length){
-                case 1:
-                    return(<p>Você</p>)
-                case 2:
-                    return(<p>Você e {newArray[0].username}</p>)
-                case 3:
-                    return(<p>Você, {newArray[0].username} e outra pessoa</p>)
-                default:
-                    return(<p>Você, {newArray[0].username} e outras {newArray.length - 1} pessoas</p>)
+        if (liked) {
+
+            if (listLikes.length !== 0) {
+                const newArray = listLikes.filter(i => i.id !== userId)
+                switch (listLikes.length) {
+                    case 1:
+                        return (<p>Você</p>)
+                    case 2:
+                        return (<p>Você e {newArray[0].username}</p>)
+                    case 3:
+                        return (<p>Você, {newArray[0].username} e outra pessoa</p>)
+                    default:
+                        return (<p>Você, {newArray[0].username} e outras {newArray.length - 1} pessoas</p>)
+                }
             }
+            
         } else{
-            switch(listLikes.length){
-                case 0:
-                    return(<p>Ninguém curtiu isso</p>)
-                case 1:
-                    return(<p>{listLikes[0].username}</p>)
-                case 2:
-                    return(<p>{listLikes[0].username} e {listLikes[1].username}</p>)
-                case 3:
-                    return(<p>{listLikes[0].username}, {listLikes[1].username} e outra pessoa</p>)
-                default:
-                    return(<p>{listLikes[0].username}, {listLikes[1].username} e outras {listLikes.length - 2} pessoas</p>)
-            }  
+            if (listLikes.length !== 0) {
+                switch (listLikes.length) {
+                    case 0:
+                        return (<p>Ninguém curtiu isso</p>)
+                    case 1:
+                        return (<p>{listLikes[0].username}</p>)
+                    case 2:
+                        return (<p>{listLikes[0].username} e {listLikes[1].username}</p>)
+                    case 3:
+                        return (<p>{listLikes[0].username}, {listLikes[1].username} e outra pessoa</p>)
+                    default:
+                        return (<p>{listLikes[0].username}, {listLikes[1].username} e outras {listLikes.length - 2} pessoas</p>)
+                }
+            }
+              
         }
     }
 
