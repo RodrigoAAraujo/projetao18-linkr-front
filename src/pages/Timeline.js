@@ -1,31 +1,48 @@
 import styled from "styled-components"
 import HeaderNavigation from "../components/HeaderNavigation.js"
 import Posts from "../components/Posts.js"
-import Post from "../components/Post.js"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "../components/Global.js"
 import axios from "axios";
+import { BackendLink } from "../settings/urls.js"
+import Post from "../components/Post.js"
 
 export default function Timeline() {
-
-    //const [user] = useContext(AuthContext)
-
     const [boolPublish, setBoolPublish] = useState(false)
     const [atualizador, setAtualizador] = useState(0)
-    const [resposta, setResposta] = useState('')
-    const [form, setForm] = useState({ link: "", comentary: ""})
+    const [resposta, setResposta] = useState(null)
+    const [link, setLink] = useState("")
+    const [commentary, setCommentary] = useState("")
     const navigate = useNavigate();
+    const[user, setUser] = useContext(AuthContext)   
+    
+    useEffect(() => {
+        if (localStorage.getItem("user")) {
+            const data = JSON.parse(localStorage.getItem("user"))
 
-    function handleForm(e) {
-        const { name, value } = e.target
-        setForm({ ...form, [name]: value })
+            setUser(data)
+
+            axios.get(`${BackendLink}timeline`, {headers: {Authorization: `Bearer ${data.token}`}} )
+                .then(res => setResposta(res.data))
+                .catch(err => console.log(err))
+        }else{
+            navigate("/")
+        }
+    }, [])
+
+    function sendPost(e){
+        e.preventDefault()
+
+        axios.post(`${BackendLink}timeline`, {link, commentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
+            .then(console.log("isso"))
+            .catch(console.log("nop"))
+
     }
 
-    //console.log(user, "user")
 
-
+    console.log(resposta)
     return (
         <>
             <HeaderNavigation/>
@@ -35,19 +52,22 @@ export default function Timeline() {
 
                     <Title>timeline</Title>
                     <PostagemUsuario>
-                        <EnglobaFotoUsuario> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxjizFCh-SE-AM_5LdvTcADq1gT0vNNBVoAw&usqp=CAU" /> </EnglobaFotoUsuario>
-                        <EnglobaForm >
+                        <EnglobaFotoUsuario> <img src={user.image_url}/> </EnglobaFotoUsuario>
+                        <form onSubmit={(e) => sendPost(e)}>
                             <div>What are you going to share today?</div>
-                            <LinkInput placeholder="http://..." required name="link" onChange={handleForm}/>
-                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={handleForm}/>
+                            <LinkInput placeholder="http://..." required name="link" onChange={(e) => setLink(e.target.value)} value={link}/>
+                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={(e) => setCommentary(e.target.value)} value={commentary}/>
                             <PublishButton type="submit" disabled={boolPublish}>
                                 {(boolPublish === false) ? "Publicar" : "Publicando..."}
                             </PublishButton>
-                        </EnglobaForm>
+                        </form>
                     </PostagemUsuario>
-                    
-                   <Posts resposta = {resposta}/>
 
+                    {resposta?resposta.map((p) => 
+                    <Post postInfo={{id: p.id,link: p.link,comentary: p.comentary}} 
+                        userInfo={{username :p.username, image_url: p.image_url}} 
+                    />): null}
+                    
                 </EnglobaConteudo>
             </Container>
         </>
@@ -66,6 +86,26 @@ background-color: #333333;
 @media (max-width: 735px){
     padding-top: 0;
 }
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+
+div{
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    color: #707070;
+    @media (max-width: 735px){
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+    }
+}
+}
 `
 const EnglobaConteudo = styled.div`
 
@@ -75,6 +115,7 @@ flex-direction: column;
 @media (max-width: 735px){
     width: 100%;
 }
+
 `
 const PostagemUsuario = styled.div`
 margin-bottom: 30px;
@@ -86,9 +127,10 @@ border-radius: 16px;
 display: flex;
 flex-direction: row;
 padding: 18px;
+
 @media (max-width: 735px){
     border-radius: 0;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     align-items: center;
     justify-content: center;
     height: 172px;
@@ -106,25 +148,7 @@ img{
     display: none;
 }
 `
-const EnglobaForm = styled.form`
-display: flex;
-flex-direction: column;
-div{
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 24px;
-    color: #707070;
-    @media (max-width: 735px){
-        display: flex; 
-        align-items: center;
-        justify-content: center;
-    }
-}
 
-width: 90%;
-`
 const Title = styled.p`
 font-family: 'Oswald';
 font-style: normal;

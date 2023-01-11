@@ -5,11 +5,14 @@ import styled from "styled-components"
 import { BackendLink } from "../settings/urls.js";
 import { AuthContext } from "./Global.js";
 import { useNavigate } from "react-router-dom";
+import LikeButton from "./LikeButton.js";
 
 export default function Post({ postInfo, userInfo }) {
 
     const [linkMeta,setLinkData]= useState(null)
     const [user] = useContext(AuthContext)
+
+    console.log(postInfo)
 
     const tagStyle = {
         color: '#FFFFFF',
@@ -17,8 +20,6 @@ export default function Post({ postInfo, userInfo }) {
         fontSize: '17px',
         cursor: 'pointer'
     };
-
-    console.log(postInfo)
 
     useEffect(()=>{
         const body ={
@@ -29,16 +30,15 @@ export default function Post({ postInfo, userInfo }) {
             .then(res => {setLinkData(res.data); console.log(res.data)})
             .catch(err => console.log(err))
 
-        console.log(linkMeta)
     },[postInfo])
+
 
 
     return (
         <PostStyle>
             <div className="user-likes">
                 <img src={userInfo.image_url} />
-
-
+                <LikeButton postId={postInfo.id}/>
             </div>
             <div className="post">
                 <h3>{userInfo.username}</h3>
@@ -68,6 +68,11 @@ const PostStyle = styled.div`
     font-family: 'Lato', sans-serif;
     padding: 17px;
     border-radius: 16px;
+    margin-bottom: 16px;
+
+    @media (max-width: 735px){
+        border-radius: 0px;
+    }
 
     .user-likes{
         margin-right: 18px;

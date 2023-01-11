@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js';
 import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
@@ -6,30 +6,23 @@ import 'react-tooltip/dist/react-tooltip.css'
 import axios from 'axios';
 import { urlAPI } from './URLs.js';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './Global.js';
+import { BackendLink } from '../settings/urls.js';
 
 export default function LikeButton(props){
-    //const postId = props.postId;
+
+    console.log(props)
+
     const [liked, isLiked] = useState(false);
     const [listLikes, setListLikes] = useState([]);
     const [userId, setUserId] = useState(0);
-    const navigate = useNavigate();
-    
+    const [user] = useContext(AuthContext)
 
-    //esse token virá do local storage ou do context
-    const token = "tokenpadrao";
-
-    useEffect(() => {
-        if(!token){
-            alert("Session expired! Please sign-in again!")
-            navigate("/");
-        }
-        verifyLike();
-      }, [])
 
     function verifyLike(){
-        const promise = axios.get(`${urlAPI}posts/likes/${props.postId}`,
+        const promise = axios.get(`${BackendLink}posts/likes/${props.postId}`,
         {headers: {
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${user.token}`
         }});
         promise.then((r) => {
             isLiked(r.data.userLikedThisPost)
@@ -42,9 +35,9 @@ export default function LikeButton(props){
     function like(){
         
         if(liked === false){
-            const promise = axios.post(`${urlAPI}posts/like/${props.postId}`, 
+            const promise = axios.post(`${BackendLink}posts/like/${props.postId}`, 
             {}, {headers: {
-                "Authorization": `Bearer ${token}`
+                Authorization: `Bearer ${user.token}`
             }})
             promise.then((r) => {verifyLike();
             return isLiked(true)});
@@ -53,10 +46,10 @@ export default function LikeButton(props){
         }
         else{
             
-            const promise = axios.delete(`${urlAPI}posts/removelike/${props.postId}`, 
+            const promise = axios.delete(`${BackendLink}posts/removelike/${props.postId}`, 
             
             {headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${user.token}`
             }})
             promise.then((r) => {verifyLike();
                 return isLiked(false)});
@@ -102,7 +95,7 @@ export default function LikeButton(props){
 
     return(
         <Content>
-            <LikeDiv onClick={like} liked={liked}>
+            <LikeDiv onClick={() => like()} liked={liked}>
                 {liked 
                 ? 
                 <AiFillHeart /> 
@@ -114,9 +107,9 @@ export default function LikeButton(props){
                 <Tooltip anchorId="like-box" content={
                     liked 
                     ? 
-                    tooltipMessage()
+                    () => tooltipMessage()
                     :
-                    tooltipMessage()
+                    () => tooltipMessage()
                 } />  
             </div>
         </Content>
@@ -124,6 +117,7 @@ export default function LikeButton(props){
 }
 
 const LikeDiv = styled.div`
+    cursor: pointer;
     svg{
         font-size: 30px;
         color: ${(props) => (props.liked ? "red" : "white")};
