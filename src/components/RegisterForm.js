@@ -28,10 +28,12 @@ export function RegisterForm(){
         const promise = axios.post(URL, body)
         
         promise.then((a)=>{
+            console.log(a)
             navigate("/")
         })
         promise.catch((a)=>{
             setLoad(false)
+            console.log(a)
             const msg = a.response.data;
             console.log(msg)
             alert(msg)
