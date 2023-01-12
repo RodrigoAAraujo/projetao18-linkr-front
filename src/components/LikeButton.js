@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js';
 import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
@@ -12,9 +12,7 @@ export default function LikeButton(props){
     const [listLikes, setListLikes] = useState([]);
     const [userId, setUserId] = useState(0);
     const [user] = useContext(AuthContext)
-
-    console.log(props.postId)
-
+    
     function verifyLike(){
         const promise = axios.get(`${BackendLink}posts/likes/${props.postId}`,
         {headers: {
@@ -27,6 +25,10 @@ export default function LikeButton(props){
             console.log(r.data)
         })
     }
+
+    useEffect(() =>{
+        verifyLike()
+    }, [])
 
     function like(){
         
@@ -116,7 +118,7 @@ const LikeDiv = styled.div`
     cursor: pointer;
     svg{
         font-size: 30px;
-        color: LikeDiv${(props) => (props.liked ? "red" : "white")};
+        color: ${(props) => (props.liked ? "red" : "white")};
         margin-top: 5px;
     }
     p{
