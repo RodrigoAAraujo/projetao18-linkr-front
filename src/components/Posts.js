@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { useContext, useEffect, useState } from "react"
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai/index.esm.js"
 import axios from 'axios'
 import LikeButton from "./LikeButton.js"
 import { AuthContext } from "./Global.js"

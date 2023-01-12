@@ -1,8 +1,9 @@
 import { useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, AuthContext, Loading, Login } from "./Global.js";
+import { AuthContext, Loading, Login } from "./Global.js";
 import styled from "styled-components";
+import { BackendLink } from "../settings/urls.js";
 
 export function LoginForm(){
     const navigate = useNavigate()
@@ -15,7 +16,7 @@ export function LoginForm(){
         e.preventDefault()
         setLoad(true)
 
-        const URL = apiURL+"signin"
+        const URL = BackendLink+"signin"
 
         const body = {
             email,

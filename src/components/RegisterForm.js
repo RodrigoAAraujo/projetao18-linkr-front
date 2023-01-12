@@ -1,8 +1,9 @@
 import { useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, Loading } from "./Global.js";
+import { Loading } from "./Global.js";
 import styled from "styled-components";
+import { BackendLink } from "../settings/urls.js";
 
 export function RegisterForm(){
     const navigate = useNavigate()
@@ -16,7 +17,7 @@ export function RegisterForm(){
         e.preventDefault()
         setLoad(true)
 
-        const URL = apiURL+"signup"
+        const URL = BackendLink+"signup"
 
         const body = {
             email,
