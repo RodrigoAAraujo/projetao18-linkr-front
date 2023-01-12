@@ -50,11 +50,12 @@ export function Login(token, _setUser){
       promise.then(()=>{
         console.log("renovado")
       })
-  }, 10000);
+  }, 20000);
 }
 
 export function Logout(_setUser){
   alert("logout")
   _setUser(false)
   window.localStorage.removeItem("user")
+  window.location.reload()
 }
