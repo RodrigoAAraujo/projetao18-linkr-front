@@ -84,9 +84,13 @@ const UsersPostsDisplay = styled.main`
 
     .container{
         max-width: 1000px;
+        width: 100%;
     }
     .posts{
         width: 70%;
+        @media (max-width: 735px){
+            width: 100%
+        }
     }
 
 `

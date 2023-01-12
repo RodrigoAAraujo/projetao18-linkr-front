@@ -71,15 +71,21 @@ const PostStyle = styled.div`
 
     @media (max-width: 735px){
         border-radius: 0px;
+        width: 100%;
     }
 
     .user-likes{
         margin-right: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 10%;
         img{
             width: 50px;
             object-fit: cover;
             aspect-ratio: 1;
             border-radius: 50%;
+            margin-bottom: 19px;
         }
         
     }
@@ -87,6 +93,7 @@ const PostStyle = styled.div`
     .post{
         color: #B7B7B7;
 
+        width: 100%;
         h3{
             font-size: 17px;
             font-weight: 400;
@@ -101,11 +108,13 @@ const LinkInfo = styled.div`
     border: 1px solid #4D4D4D;
     margin-top: 15px;
     cursor: pointer;
+    width: 100%;
 
     a{
         display: flex;
         text-decoration:none;
         color: #FFFFFF;
+        width: 100%;
     }
 
     :hover{
@@ -143,13 +152,11 @@ const LinkInfo = styled.div`
     }
 
     
-    
-
     img{
         border-radius: 0px 11px  11px 0px;
         aspect-ratio: 1;
         object-fit: cover;
-        width: 155px
-
+        width: 100%;
+        max-width:200px;
     }
 `
