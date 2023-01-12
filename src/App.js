@@ -33,7 +33,7 @@ function App() {
             <Route path="/" element={<LoginPage/>}/>
             <Route path="/timeline" element={<Timeline/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/test" element={<LikeButton/>}/>
+            <Route path="/users/:id" element={<UsersPosts/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>

@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import styled from "styled-components";
 import { AuthContext } from "../components/Global.js"
 import LoginPage from "./LoginPage.js";
@@ -10,9 +10,13 @@ export default function HomePage(){
     const navigate = useNavigate();
     const [user,] = useContext(AuthContext);
 
-    if (user === false){
-        navigate("/")
-    }
+    useEffect(()=>{
+
+        if (user === false){
+            navigate("/")
+        }
+    })
+    
 
     return(
         <HomePageStyle>
