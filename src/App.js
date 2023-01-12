@@ -35,6 +35,7 @@ function App() {
             <Route path="/timeline" element={<Timeline/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="/test" element={<Posts/>}/>
+            <Route path="/users/:id" element={<UsersPosts/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>

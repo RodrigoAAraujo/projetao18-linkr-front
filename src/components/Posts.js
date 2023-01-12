@@ -1,76 +1,79 @@
 import styled from "styled-components"
-import { useEffect, useState } from "react"
-import {AiOutlineHeart ,AiFillHeart} from "react-icons/ai/index.esm.js"
+import { useContext, useEffect, useState } from "react"
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai/index.esm.js"
 import axios from 'axios'
 import LikeButton from "./LikeButton.js"
-import { urlAPI } from "./URLs.js"
+import { AuthContext } from "./Global.js"
+import { BackendLink } from "../settings/urls.js"
 
-export default function Posts(props){
+export default function Posts(props) {
+
     const [boolLike, setBoolLike] = useState(false)
     const [resposta, setResposta] = useState('')
 
-    function mudaLike(){
-        setBoolLike(!boolLike)
-    }
+    const [user] = useContext(AuthContext)
+
 
     useEffect(() => {
 
-        const URL = urlAPI;
-    
-        //adaptar config pra receber o token correto
+        const URL = `${BackendLink}timeline`
+
         const config = {
-          headers: {
-            Authorization: `Bearer tokenpadrao`
-          }
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
         }
         const requisicao = axios.get(URL, config);
-    
-        //ainda falta colocar a verificaçao do token
-        
+
+
         requisicao.then((res) => {
-          setResposta(res.data)
-          console.log(res.data, "resposta do servidor no get /posts", resposta)
+            setResposta(res.data)
+            console.log(res.data, "resposta do servidor no get /posts", resposta)
         });
-    
+
         requisicao.catch((err) => {
-          console.log("deu erro!")
-          console.log(err)
+            console.log("deu erro!")
+            console.log(err)
         })
-    
-      }, []);
 
-      console.log(resposta, "resposta")
+    }, []);
 
-      if(resposta !== ''){
-          return (
-              resposta.map(item =>
-                  <ContainerPost>
-                      <EnglobaFotoUsuarioPost>
-                          <img src={item.img} />
-                          <LikeButton postId={item.id}/>
-                      </EnglobaFotoUsuarioPost>
-                      <ConteudoPostagem>
-                          <NomeUsuario>{item.username}</NomeUsuario>
-                          <DescricaoPost>{item.comentary}</DescricaoPost>
-                          <EnglobaConteudoLink onClick>
-                              <EnglobaTextosLink>
-                                  <TituloLink>{item.metadata.title}</TituloLink>
-                                  <DescricaoLink>{item.metadata.description}</DescricaoLink>
-                                  <Link>{item.metadata.url}</Link>
-                              </EnglobaTextosLink>
-                              <ImagemLink> <img src={item.metadata.image} /> </ImagemLink>
-                          </EnglobaConteudoLink>
-                      </ConteudoPostagem>
-                  </ContainerPost>
-              )
+    if (resposta !== '') {
+
+        return (
+
+            resposta.map(item =>
+                <ContainerPost>
+                    <EnglobaFotoUsuarioPost>
+                        <img src={item.img} />
+                        <LikeButton postId={item.id} />
+                    </EnglobaFotoUsuarioPost>
+                    <ConteudoPostagem>
+                        <NomeUsuario>{item.username}</NomeUsuario>
+                        <DescricaoPost>{item.comentary}</DescricaoPost>
+                        <EnglobaConteudoLink onClick>
+                            <EnglobaTextosLink>
+                                <TituloLink>{item.metadata.title}</TituloLink>
+                                <DescricaoLink>{item.metadata.description}</DescricaoLink>
+                                <Link>{item.metadata.url}</Link>
+                            </EnglobaTextosLink>
+                            <ImagemLink> <img src={item.metadata.image} /> </ImagemLink>
+                        </EnglobaConteudoLink>
+                    </ConteudoPostagem>
+                </ContainerPost>
+            )
 
 
-          )
+        )
 
-      }
-    
+    }
+    else{
+        return(
+            null
+        )
+    }
 
-    
+
 }
 
 const EnglobaFotoUsuarioPost = styled.div`

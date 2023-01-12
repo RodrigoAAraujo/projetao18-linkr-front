@@ -1,8 +1,6 @@
 import styled from "styled-components"
 
 export default function UserInfo({photo, name}){
-    console.log(photo)
-
     return(
         <UserInfoStyle>
             <img src={photo}/>

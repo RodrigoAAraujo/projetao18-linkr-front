@@ -4,7 +4,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 
-export const apiURL = 'http://localhost:4003/'
+export const apiURL = 'http://localhost:4006/'
 
 
 //Pode-se criar quantos Contexts forem necessarios e manter
@@ -60,6 +60,4 @@ export function Logout(_setUser){
   alert("logout")
   _setUser(false)
   window.localStorage.removeItem("user")
-  const navigate = useNavigate()
-  navigate("/")
 }
