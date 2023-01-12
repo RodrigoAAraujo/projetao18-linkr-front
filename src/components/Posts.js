@@ -3,9 +3,9 @@ import { useEffect, useState } from "react"
 import {AiOutlineHeart ,AiFillHeart} from "react-icons/ai/index.esm.js"
 import axios from 'axios'
 import LikeButton from "./LikeButton.js"
+import { urlAPI } from "./URLs.js"
 
 export default function Posts(props){
-
     const [boolLike, setBoolLike] = useState(false)
     const [resposta, setResposta] = useState('')
 
@@ -15,7 +15,7 @@ export default function Posts(props){
 
     useEffect(() => {
 
-        const URL = "http://localhost:8080/timeline"
+        const URL = urlAPI;
     
         //adaptar config pra receber o token correto
         const config = {
