@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import axios from 'axios';
-import { urlAPI } from './URLs.js';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './Global.js';
 import { BackendLink } from '../settings/urls.js';

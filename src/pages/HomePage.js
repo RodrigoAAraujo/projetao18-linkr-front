@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react"
 import styled from "styled-components";
 import { AuthContext } from "../components/Global.js"
-import LoginPage from "./LoginPage.js";
 import { useNavigate } from "react-router-dom";
 import HeaderNavigation from "../components/HeaderNavigation.js";
 
