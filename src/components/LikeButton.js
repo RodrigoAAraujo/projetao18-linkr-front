@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js';
+import { AiOutlineHeart, AiFillHeart, AiOutlineComment} from 'react-icons/ai/index.js';
 import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -126,7 +126,7 @@ export default function LikeButton(props){
 const LikeDiv = styled.div`
     svg{
         font-size: 30px;
-        color: ${(props) => (props.liked ? "red" : "white")};
+        color: LikeDiv${(props) => (props.liked ? "red" : "white")};
         margin-top: 5px;
     }
     p{

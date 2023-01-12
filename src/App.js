@@ -10,7 +10,8 @@ import Timeline from "./pages/Timeline.js"
 import axios from "axios";
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
-import LikeButton from "./components/LikeButton.js";
+import CommentaryButton from "./components/Comments/ComentaryButton.js";
+import Posts from "./components/Posts.js";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             <Route path="/" element={<LoginPage/>}/>
             <Route path="/timeline" element={<Timeline/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/test" element={<LikeButton/>}/>
+            <Route path="/test" element={<Posts/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>
