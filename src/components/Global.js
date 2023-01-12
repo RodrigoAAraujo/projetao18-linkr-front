@@ -2,10 +2,7 @@ import { createContext, useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-
-
-export const apiURL = 'http://localhost:4006/'
-
+import { BackendLink } from "../settings/urls.js"
 
 //Pode-se criar quantos Contexts forem necessarios e manter
 //tudo simples enquanto usarmos apenas esse GlobalProvider
@@ -40,7 +37,7 @@ export const Loading = (props) => {
 
 export function Login(token, _setUser){
     setInterval(() => {
-      const URL = apiURL+"renew"
+      const URL = BackendLink+"renew"
       const config = {
         headers: { "Authorization": "Bearer "+token }
       }

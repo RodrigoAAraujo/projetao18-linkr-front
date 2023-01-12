@@ -1,16 +1,11 @@
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import { apiURL, AuthContext, Login } from "./components/Global.js";
-import { GlobalProvider } from "./components/Global.js";
-import HeaderNavigation from "./components/HeaderNavigation.js";
-import HomePage from "./pages/HomePage.js";
+import { AuthContext, Login } from "./components/Global.js";
 import SignUpPage from "./pages/SignupPage.js";
 import Timeline from "./pages/Timeline.js"
-import axios from "axios";
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
-import LikeButton from "./components/LikeButton.js";
 
 
 function App() {

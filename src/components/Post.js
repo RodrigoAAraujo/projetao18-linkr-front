@@ -4,7 +4,6 @@ import { ReactTagify } from "react-tagify"
 import styled from "styled-components"
 import { BackendLink } from "../settings/urls.js";
 import { AuthContext } from "./Global.js";
-import { useNavigate } from "react-router-dom";
 import LikeButton from "./LikeButton.js";
 
 export default function Post({ postInfo, userInfo }) {
