@@ -9,9 +9,6 @@ import { AuthContext } from './Global.js';
 import { BackendLink } from '../settings/urls.js';
 
 export default function LikeButton(props){
-
-    console.log(props)
-
     const [liked, isLiked] = useState(false);
     const [listLikes, setListLikes] = useState([]);
     const [userId, setUserId] = useState(0);
@@ -119,7 +116,7 @@ const LikeDiv = styled.div`
     cursor: pointer;
     svg{
         font-size: 30px;
-        color: ${(props) => (props.liked ? "red" : "white")};
+        color: LikeDiv${(props) => (props.liked ? "red" : "white")};
         margin-top: 5px;
     }
     p{

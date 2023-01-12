@@ -6,6 +6,8 @@ import SignUpPage from "./pages/SignupPage.js";
 import Timeline from "./pages/Timeline.js"
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
+import CommentaryButton from "./components/Comments/ComentaryButton.js";
+import Posts from "./components/Posts.js";
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
             <Route path="/" element={<LoginPage/>}/>
             <Route path="/timeline" element={<Timeline/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/test" element={<CommentaryButton/>}/>
             <Route path="/users/:id" element={<UsersPosts/>}/>
           </Routes>
         </BrowserRouter>
