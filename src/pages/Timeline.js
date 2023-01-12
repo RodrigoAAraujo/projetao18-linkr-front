@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import HeaderNavigation from "../components/HeaderNavigation.js"
-import Posts from "../components/Posts.js"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
@@ -17,6 +16,7 @@ export default function Timeline() {
     const [commentary, setCommentary] = useState("")
     const navigate = useNavigate();
     const[user, setUser] = useContext(AuthContext)   
+    const [render, setRender] = useState(false)
     
     useEffect(() => {
         if (localStorage.getItem("user")) {
@@ -30,13 +30,17 @@ export default function Timeline() {
         }else{
             navigate("/")
         }
-    }, [])
+    }, [render])
 
     function sendPost(e){
         e.preventDefault()
 
         axios.post(`${BackendLink}timeline`, {link, commentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
-            .then(console.log("isso"))
+            .then(() => {
+                setRender(!render)
+                setLink("")
+                setCommentary("")
+            })
             .catch(console.log("nop"))
 
     }

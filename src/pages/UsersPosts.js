@@ -76,6 +76,7 @@ const UsersPostsDisplay = styled.main`
     margin-top: 60px;
     display: flex;
     justify-content: center;
+    background-color: #333333;
 
     .interactions{
         margin-top: 30px;
@@ -83,9 +84,13 @@ const UsersPostsDisplay = styled.main`
 
     .container{
         max-width: 1000px;
+        width: 100%;
     }
     .posts{
         width: 70%;
+        @media (max-width: 735px){
+            width: 100%
+        }
     }
 
 `
