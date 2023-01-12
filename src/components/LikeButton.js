@@ -10,9 +10,6 @@ import { AuthContext } from './Global.js';
 import { BackendLink } from '../settings/urls.js';
 
 export default function LikeButton(props){
-
-    console.log(props)
-
     const [liked, isLiked] = useState(false);
     const [listLikes, setListLikes] = useState([]);
     const [userId, setUserId] = useState(0);
