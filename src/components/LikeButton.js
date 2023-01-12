@@ -4,15 +4,11 @@ import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import axios from 'axios';
-import { urlAPI } from './URLs.js';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './Global.js';
 import { BackendLink } from '../settings/urls.js';
 
 export default function LikeButton(props){
-
-    console.log(props)
-
     const [liked, isLiked] = useState(false);
     const [listLikes, setListLikes] = useState([]);
     const [userId, setUserId] = useState(0);
@@ -120,7 +116,7 @@ const LikeDiv = styled.div`
     cursor: pointer;
     svg{
         font-size: 30px;
-        color: ${(props) => (props.liked ? "red" : "white")};
+        color: LikeDiv${(props) => (props.liked ? "red" : "white")};
         margin-top: 5px;
     }
     p{

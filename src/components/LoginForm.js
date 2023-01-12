@@ -1,8 +1,9 @@
 import { useContext, useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiURL, AuthContext, Loading, Login } from "./Global.js";
+import { AuthContext, Loading, Login } from "./Global.js";
 import styled from "styled-components";
+import { BackendLink } from "../settings/urls.js";
 
 export function LoginForm(){
     const navigate = useNavigate()
@@ -15,7 +16,7 @@ export function LoginForm(){
         e.preventDefault()
         setLoad(true)
 
-        const URL = apiURL+"signin"
+        const URL = BackendLink+"signin"
 
         const body = {
             email,
@@ -27,10 +28,14 @@ export function LoginForm(){
             setUser(a.data)
             Login(a.data.token, setUser)
             window.localStorage.setItem('user', JSON.stringify(a.data));
+            console.log(a.data.token);
             navigate("/timeline")
         })
         promise.catch((a)=>{
             console.log(a)
+            setLoad(false)
+            const msg = a.response.data;
+            alert(msg)
         })
     }
 
