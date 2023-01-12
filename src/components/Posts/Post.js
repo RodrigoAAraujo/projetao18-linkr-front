@@ -2,14 +2,19 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { ReactTagify } from "react-tagify"
 import styled from "styled-components"
-import { BackendLink } from "../settings/urls.js";
-import { AuthContext } from "./Global.js";
+import { BackendLink } from "../../settings/urls.js";
+import { AuthContext } from "../Global.js";
 import LikeButton from "./LikeButton.js";
+import { FaPencilAlt } from "react-icons/fa/index.esm.js";
+import { FaTrash } from "react-icons/fa/index.esm.js";
+import ConfirmationScreen from "../ConfirmationScreen.js";
 
-export default function Post({ postInfo, userInfo }) {
+export default function Post({ postInfo, userInfo, renderer}) {
 
     const [linkMeta,setLinkData]= useState(null)
     const [user] = useContext(AuthContext)
+    const [mine, setMine] = useState(false)
+    const [confirmation, setConfirmation] = useState(false)
 
     console.log(postInfo)
 
@@ -29,10 +34,13 @@ export default function Post({ postInfo, userInfo }) {
             .then(res => {setLinkData(res.data); console.log(res.data)})
             .catch(err => console.log(err))
 
+        if(userInfo.username === user.username){
+            setMine(true)
+        }
+
     },[postInfo])
 
-
-
+    
     return (
         <PostStyle>
             <div className="user-likes">
@@ -40,7 +48,15 @@ export default function Post({ postInfo, userInfo }) {
                 <LikeButton postId={postInfo.id}/>
             </div>
             <div className="post">
-                <h3>{userInfo.username}</h3>
+                <section>
+                    <h3>{userInfo.username}</h3>
+                    {mine?
+                        <div>
+                            <FaPencilAlt/>
+                            <FaTrash onClick={() => setConfirmation(true)}/>
+                        </div>: 
+                    null}
+                </section>
                 <ReactTagify tagStyle={tagStyle}>
                     {postInfo.comentary}
                 </ReactTagify>
@@ -57,6 +73,7 @@ export default function Post({ postInfo, userInfo }) {
                     </LinkInfo>
                 }
             </div>
+            {confirmation? <ConfirmationScreen back={setConfirmation} postId={postInfo.id} render={renderer}/>: null}
         </PostStyle>
     )
 }
@@ -98,6 +115,18 @@ const PostStyle = styled.div`
             font-size: 17px;
             font-weight: 400;
             color: #FFFFFF;
+        }
+        section{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+
+            svg{
+                cursor: pointer;
+                color: #FFFFFF;
+                font-size: 18px;
+                margin-right: 12px;
+            }
         }
     }
 `
