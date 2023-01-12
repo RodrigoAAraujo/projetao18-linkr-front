@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import HeaderNavigation from "../components/HeaderNavigation.js"
-import Posts from "../components/Posts.js"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"

@@ -76,6 +76,7 @@ const UsersPostsDisplay = styled.main`
     margin-top: 60px;
     display: flex;
     justify-content: center;
+    background-color: #333333;
 
     .interactions{
         margin-top: 30px;

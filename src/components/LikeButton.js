@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js';
 import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './Global.js';
 import { BackendLink } from '../settings/urls.js';
 
@@ -14,6 +13,7 @@ export default function LikeButton(props){
     const [userId, setUserId] = useState(0);
     const [user] = useContext(AuthContext)
 
+    console.log(props.postId)
 
     function verifyLike(){
         const promise = axios.get(`${BackendLink}posts/likes/${props.postId}`,
@@ -35,7 +35,7 @@ export default function LikeButton(props){
             {}, {headers: {
                 Authorization: `Bearer ${user.token}`
             }})
-            promise.then((r) => {verifyLike();
+            promise.then(() => {verifyLike();
             return isLiked(true)});
             promise.catch((err) => console.log(err))
 
@@ -47,7 +47,7 @@ export default function LikeButton(props){
             {headers: {
                 "Authorization": `Bearer ${user.token}`
             }})
-            promise.then((r) => {verifyLike();
+            promise.then(() => {verifyLike();
                 return isLiked(false)});
             promise.catch((err) => console.log(err))
         }
