@@ -23,17 +23,25 @@ export default function TrendingContainer() {
             {hashtags.map(hashtag=> <div onClick={()=>{navigate(`/hashtag/${hashtag.name}`)}}># {hashtag.name}</div>)}
         </Container>
     );
-  }
-  const Container = styled.div`
+}
+
+const Container = styled.div`
     background-color: #171717;
     width: 301px;
     max-height: 406px;
+    overflow-y: scroll;
     box-sizing: border-box;
     padding-top: 9px;
     padding-bottom: 23px;
     border-radius: 16px;
     margin-left: 25px;
     margin-top: 100px;
+    color: #FFFFFF;
+
+    @media (max-width: 735px){
+        display: none;
+    }
+
     h1{
         margin-left: 16px;
         font-size: 27px;
@@ -48,5 +56,12 @@ export default function TrendingContainer() {
         margin-left: 16px;
         font-size: 19px;
         font-weight: bold;
+        cursor: pointer;
+
+        :hover{
+            opacity: 0.8;
+        }
     }
+
+
 `;
