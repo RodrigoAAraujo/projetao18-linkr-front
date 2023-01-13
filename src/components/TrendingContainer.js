@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { BackendLink } from "../settings/urls.js";
 
 export default function TrendingContainer() {
+    const navigate = useNavigate();
     const [hashtags, setHashtags] = useState([]);
     useEffect(() => {
         const promise = axios.get(`${BackendLink}trending`);
@@ -18,7 +20,7 @@ export default function TrendingContainer() {
         <Container>
             <h1>trending</h1>
             <hr/>
-            {hashtags.map(hashtag=> <div># {hashtag.name}</div>)}
+            {hashtags.map(hashtag=> <div onClick={()=>{navigate(`/hashtag/${hashtag.name}`)}}># {hashtag.name}</div>)}
         </Container>
     );
   }

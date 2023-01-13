@@ -7,6 +7,7 @@ import Timeline from "./pages/Timeline.js"
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
 import CommentaryButton from "./components/Comments/ComentaryButton.js";
+import HashtagPage from "./pages/HashtagPage.js";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="/test" element={<CommentaryButton/>}/>
             <Route path="/users/:id" element={<UsersPosts/>}/>
+            <Route path="/hashtag/:hashtag" element={<HashtagPage/>}/>
           </Routes>
         </BrowserRouter>
     </AppStyle>

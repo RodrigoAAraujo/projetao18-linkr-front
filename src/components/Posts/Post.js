@@ -8,6 +8,7 @@ import LikeButton from "./LikeButton.js";
 import { FaPencilAlt } from "react-icons/fa/index.esm.js";
 import { FaTrash } from "react-icons/fa/index.esm.js";
 import ConfirmationScreen from "../ConfirmationScreen.js";
+import { useNavigate } from "react-router";
 
 export default function Post({ postInfo, userInfo, renderer}) {
 
@@ -15,6 +16,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
     const [user] = useContext(AuthContext)
     const [mine, setMine] = useState(false)
     const [confirmation, setConfirmation] = useState(false)
+    const navigate = useNavigate();
 
     console.log(postInfo)
 
@@ -57,7 +59,8 @@ export default function Post({ postInfo, userInfo, renderer}) {
                         </div>: 
                     null}
                 </section>
-                <ReactTagify tagStyle={tagStyle}>
+                
+                <ReactTagify tagStyle={tagStyle} tagClicked={(tag)=> navigate(`/hashtag/${tag.slice(1)}`)}>
                     {postInfo.comentary}
                 </ReactTagify>
                 {linkMeta === null? null :
