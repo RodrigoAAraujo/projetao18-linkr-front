@@ -122,7 +122,7 @@ export default function Timeline() {
 
     
     return (
-        <>
+        <BackGround>
             <HeaderNavigation/>
 
             <Container>
@@ -151,20 +151,25 @@ export default function Timeline() {
                 </EnglobaConteudo>
                 <TrendingContainer/>
             </Container>
-        </>
+        </BackGround>
     )
 
 }
 
+const BackGround = styled.main`
+    background-color: #333333;
+`
 
 const Container = styled.div`
-width: 100%;
+width: 95%;
+margin: 0px auto;
 display: flex;
 justify-content: center;
 padding-top: 53px;
 background-color: #333333;
 @media (max-width: 735px){
     padding-top: 0;
+    width: 100%;
 }
 
 form{
@@ -235,7 +240,7 @@ font-weight: 700;
 font-size: 43px;
 line-height: 64px;
 color: #FFFFFF;
-margin: 0 0 43px 0;
+margin: 0 0 43px 10px;
 @media (max-width: 735px){
     margin: 0 0 23px 17px;
 }
@@ -304,20 +309,9 @@ align-self: flex-end;
     height: 22px;
 }
 
-`
-
-const LoadButton = styled.button`
-width: 100%;
-height: 61px;
-background: #1877F2;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 16px;
-font-family: 'Lato';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-color: #FFFFFF;
+:hover{
+    opacity: 0.8;
+}
 `
 export {Container, EnglobaConteudo, Title};
 

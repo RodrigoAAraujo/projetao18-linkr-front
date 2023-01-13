@@ -8,6 +8,7 @@ import { AuthContext } from "../components/Global.js";
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js";
 import { render } from "@testing-library/react";
+import TrendingContainer from "../components/TrendingContainer.js";
 
 export default function UsersPosts() {
     const navigate = useNavigate()
@@ -52,27 +53,47 @@ export default function UsersPosts() {
     }
 
     return (
-        <>
+        <BackGround>
             <HeaderNavigation />
-            {UserPosts === null ? null :
-                <UsersPostsDisplay>
-                    <div className="container">
-                        <UserInfo photo={UserPosts.user.image_url} name={UserPosts.user.username} />
-                        <div className="interactions">
-                            <div className="posts">
-                                {UserPosts.posts.map((p) => <Post postInfo={p} userInfo={UserPosts.user} />)}
+            <MainScreen>
 
-                            </div>
-                            <div>
+                {UserPosts === null ? null :
+                    <UsersPostsDisplay>
+                        <div className="container">
+                            <UserInfo photo={UserPosts.user.image_url} name={UserPosts.user.username} />
+                            <div className="interactions">
+                                <div className="posts">
+                                    {UserPosts.posts.map((p) => <Post postInfo={p} userInfo={UserPosts.user} />)}
 
+                                </div>
+                                <div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </UsersPostsDisplay>
-            }
-        </>
+                    </UsersPostsDisplay>
+                }
+                <TrendingContainer/>
+            </MainScreen>
+            
+        </BackGround>
     )
 }
+
+const BackGround = styled.div`
+    background-color: #333333;
+`
+
+const MainScreen = styled.main`
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin: 0px auto;
+
+    @media (max-width: 735px){
+        width: 100%
+    }
+`
 
 const UsersPostsDisplay = styled.main`
     margin-top: 60px;
@@ -89,7 +110,6 @@ const UsersPostsDisplay = styled.main`
         width: 100%;
     }
     .posts{
-        width: 70%;
         @media (max-width: 735px){
             width: 100%
         }
