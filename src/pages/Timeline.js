@@ -7,6 +7,7 @@ import { AuthContext } from "../components/Global.js"
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js"
 import Post from "../components/Posts/Post.js"
+import TrendingContainer from "../components/TrendingContainer.js"
 
 export default function Timeline() {
     const [boolPublish, setBoolPublish] = useState(false)
@@ -82,6 +83,7 @@ export default function Timeline() {
                     />): null}
                     
                 </EnglobaConteudo>
+                <TrendingContainer/>
             </Container>
         </>
     )
@@ -92,8 +94,9 @@ export default function Timeline() {
 const Container = styled.div`
 width: 100%;
 display: flex;
-flex-direction: column;
-align-items: center;
+/* flex-direction: column; */
+justify-content: center;
+/* align-items: center; */
 padding-top: 53px;
 background-color: #333333;
 @media (max-width: 735px){
