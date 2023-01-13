@@ -6,6 +6,9 @@ import { useContext } from "react"
 import { AuthContext } from "../components/Global.js"
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js"
+import Post from "../components/Post.js"
+import { TfiReload } from 'react-icons/tfi/index.js';
+import useInterval from 'use-interval'
 import Post from "../components/Posts/Post.js"
 import TrendingContainer from "../components/TrendingContainer.js"
 
