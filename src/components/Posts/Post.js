@@ -18,8 +18,6 @@ export default function Post({ postInfo, userInfo, renderer}) {
     const [confirmation, setConfirmation] = useState(false)
     const navigate = useNavigate();
 
-    
-
     const tagStyle = {
         color: '#FFFFFF',
         fontWeight: 700,

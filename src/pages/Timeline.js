@@ -123,7 +123,7 @@ export default function Timeline() {
 
     
     return (
-        <>
+        <BackGround>
             <HeaderNavigation/>
 
             <Container>
@@ -152,20 +152,25 @@ export default function Timeline() {
                 </EnglobaConteudo>
                 <TrendingContainer/>
             </Container>
-        </>
+        </BackGround>
     )
 
 }
 
+const BackGround = styled.main`
+    background-color: #333333;
+`
 
 const Container = styled.div`
-width: 100%;
+width: 95%;
+margin: 0px auto;
 display: flex;
 justify-content: center;
 padding-top: 53px;
 background-color: #333333;
 @media (max-width: 735px){
     padding-top: 0;
+    width: 100%;
 }
 
 form{
