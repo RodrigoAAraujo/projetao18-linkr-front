@@ -175,7 +175,7 @@ font-weight: 700;
 font-size: 43px;
 line-height: 64px;
 color: #FFFFFF;
-margin: 0 0 43px 0;
+margin: 0 0 43px 10px;
 @media (max-width: 735px){
     margin: 0 0 23px 17px;
 }
@@ -242,6 +242,10 @@ margin: 6px 0 0 0;
 align-self: flex-end;
 @media (max-width: 735px){
     height: 22px;
+}
+
+:hover{
+    opacity: 0.8;
 }
 `
 export {Container, EnglobaConteudo, Title};
