@@ -25,30 +25,28 @@ export default function TrendingContainer() {
     );
   }
   const Container = styled.div`
-  background-color: #171717;
-  width: 301px;
-  max-height: 406px;
-  box-sizing: border-box;
-  padding-top: 9px;
-  padding-bottom: 23px;
-  border-radius: 16px;
-  margin-left: 25px;
-  margin-top: 100px;
-  h1{
-    margin-left: 16px;
-    font-size: 27px;
-    font-weight: bold;
-  }
-  hr{
-    margin-top: 12px;
-    margin-bottom: 22px;
-  }
-  div{
-    margin-bottom: 7px;
-    margin-left: 16px;
-    font-size: 19px;
-    font-weight: bold;
-  }
-  
-;
-  `;
+    background-color: #171717;
+    width: 301px;
+    max-height: 406px;
+    box-sizing: border-box;
+    padding-top: 9px;
+    padding-bottom: 23px;
+    border-radius: 16px;
+    margin-left: 25px;
+    margin-top: 100px;
+    h1{
+        margin-left: 16px;
+        font-size: 27px;
+        font-weight: bold;
+    };
+    hr{
+        margin-top: 12px;
+        margin-bottom: 22px;
+    };
+    div{
+        margin-bottom: 7px;
+        margin-left: 16px;
+        font-size: 19px;
+        font-weight: bold;
+    }
+`;
