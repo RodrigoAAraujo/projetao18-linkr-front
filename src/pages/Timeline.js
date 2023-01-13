@@ -94,9 +94,7 @@ export default function Timeline() {
 const Container = styled.div`
 width: 100%;
 display: flex;
-/* flex-direction: column; */
 justify-content: center;
-/* align-items: center; */
 padding-top: 53px;
 background-color: #333333;
 @media (max-width: 735px){
@@ -241,6 +239,7 @@ align-self: flex-end;
     height: 22px;
 }
 `
+export {Container, EnglobaConteudo, Title};
 
 
 
