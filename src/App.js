@@ -7,7 +7,6 @@ import Timeline from "./pages/Timeline.js"
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
 import CommentaryButton from "./components/Comments/ComentaryButton.js";
-import Posts from "./components/Posts.js";
 import TestPage from "./pages/TestPage.js";
 
 

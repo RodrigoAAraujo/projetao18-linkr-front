@@ -33,6 +33,9 @@ export function LoginForm(){
         })
         promise.catch((a)=>{
             console.log(a)
+            setLoad(false)
+            const msg = a.response.data;
+            alert(msg)
         })
     }
 

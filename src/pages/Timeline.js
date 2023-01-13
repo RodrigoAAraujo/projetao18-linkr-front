@@ -1,22 +1,22 @@
 import styled from "styled-components"
 import HeaderNavigation from "../components/HeaderNavigation.js"
-import Posts from "../components/Posts.js"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "../components/Global.js"
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js"
-import Post from "../components/Post.js"
+import Post from "../components/Posts/Post.js"
 
 export default function Timeline() {
     const [boolPublish, setBoolPublish] = useState(false)
     const [atualizador, setAtualizador] = useState(0)
     const [resposta, setResposta] = useState(null)
     const [link, setLink] = useState("")
-    const [commentary, setCommentary] = useState("")
+    const [comentary, setCommentary] = useState("")
     const navigate = useNavigate();
     const[user, setUser] = useContext(AuthContext)   
+    const [render, setRender] = useState(false)
     
     useEffect(() => {
         if (localStorage.getItem("user")) {
@@ -30,14 +30,22 @@ export default function Timeline() {
         }else{
             navigate("/")
         }
-    }, [])
+    }, [render])
 
     function sendPost(e){
         e.preventDefault()
 
-        axios.post(`${BackendLink}timeline`, {link, commentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
-            .then(console.log("isso"))
-            .catch(console.log("nop"))
+        setBoolPublish(true)
+
+        axios.post(`${BackendLink}timeline`, {link, comentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
+            .then(() => {
+                console.log("boa")
+                setRender(!render)
+                setLink("")
+                setCommentary("")
+                setBoolPublish(false)
+            })
+            .catch(() => setBoolPublish(false))
 
     }
 
@@ -60,7 +68,7 @@ export default function Timeline() {
                         <form onSubmit={(e) => sendPost(e)}>
                             <div>What are you going to share today?</div>
                             <LinkInput placeholder="http://..." required name="link" onChange={(e) => setLink(e.target.value)} value={link}/>
-                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={(e) => setCommentary(e.target.value)} value={commentary}/>
+                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={(e) => setCommentary(e.target.value)} value={comentary}/>
                             <PublishButton type="submit" disabled={boolPublish}>
                                 {(boolPublish === false) ? "Publicar" : "Publicando..."}
                             </PublishButton>
@@ -70,6 +78,7 @@ export default function Timeline() {
                     {resposta?resposta.map((p) => 
                     <Post postInfo={{id: p.id,link: p.link,comentary: p.comentary}} 
                         userInfo={{username :p.username, image_url: p.image_url}} 
+                        renderer={{render, setRender}}
                     />): null}
                     
                 </EnglobaConteudo>
@@ -85,7 +94,7 @@ width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding-top: 71px;
+padding-top: 53px;
 background-color: #333333;
 @media (max-width: 735px){
     padding-top: 0;
@@ -123,7 +132,6 @@ flex-direction: column;
 `
 const PostagemUsuario = styled.div`
 margin-bottom: 30px;
-height: 280px;
 width: 100%;
 background: #FFFFFF;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -143,6 +151,7 @@ padding: 18px;
 const EnglobaFotoUsuario = styled.div`
 height: 100%;
 width: 50px;
+margin-right: 18px;
 img{
     height: 50px;
     width: 50px;
@@ -191,6 +200,7 @@ margin-top: 2%;
 `
 const DescricaoInput = styled.textarea`
 width: 100%;
+max-width: 100%;
 height: 100px;
 background: #EFEFEF;
 border-radius: 5px;
@@ -223,6 +233,7 @@ border: none;
 color: white;
 cursor: pointer;
 margin: 6px 0 0 0;
+align-self: flex-end;
 @media (max-width: 735px){
     height: 22px;
 }

@@ -13,6 +13,8 @@ const UserInfoStyle = styled.div`
     display: flex;
     align-items: center;
 
+    margin-left: 10px;
+    
     img{
         width: 50px;
         height: 50px;

@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import {Logout} from "./Global.js"
@@ -22,8 +21,7 @@ export default function HeaderNavigation(){
                         <BiChevronUp/>:
                         <BiChevronDown/>
                     }
-                    
-
+            
                     <img src={user.image_url}/>
                 </div>
             </section>
