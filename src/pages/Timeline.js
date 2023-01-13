@@ -8,6 +8,8 @@ import axios from "axios";
 import { BackendLink } from "../settings/urls.js"
 import Post from "../components/Posts/Post.js"
 import TrendingContainer from "../components/TrendingContainer.js"
+import {TfiReload} from 'react-icons/tfi/index.js'
+import useInterval from 'use-interval'
 
 export default function Timeline() {
     const [boolPublish, setBoolPublish] = useState(false)
@@ -301,6 +303,21 @@ align-self: flex-end;
 @media (max-width: 735px){
     height: 22px;
 }
+
+`
+
+const LoadButton = styled.button`
+width: 100%;
+height: 61px;
+background: #1877F2;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 16px;
+font-family: 'Lato';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+color: #FFFFFF;
 `
 export {Container, EnglobaConteudo, Title};
 
