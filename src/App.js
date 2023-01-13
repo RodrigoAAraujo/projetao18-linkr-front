@@ -7,6 +7,7 @@ import Timeline from "./pages/Timeline.js"
 import UsersPosts from "./pages/UsersPosts.js";
 import LoginPage from "./pages/LoginPage.js";
 import CommentaryButton from "./components/Comments/ComentaryButton.js";
+import TrendingContainer from "./components/TrendingContainer.js";
 
 
 function App() {
