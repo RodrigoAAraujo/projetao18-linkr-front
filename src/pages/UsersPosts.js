@@ -1,18 +1,20 @@
 import HeaderNavigation from "../components/HeaderNavigation.js";
 import UserInfo from "../components/UserInfo.js";
 import styled from "styled-components";
-import Post from "../components/Post.js";
+import Post from "../components/Posts/Post.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/Global.js";
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js";
+import { render } from "@testing-library/react";
 
 export default function UsersPosts() {
     const navigate = useNavigate()
     const [user, setUser] = useContext(AuthContext)
     const { id } = useParams()
     const [UserPosts, setUsersPosts] = useState(null)
+    const [render, setRender] = useState(false)
 
     /*const UserPosts =
     {
@@ -43,7 +45,7 @@ export default function UsersPosts() {
         }else{
             navigate("/")
         }
-    }, [])
+    }, [id, render])
 
     if(user === false){
         navigate("/")

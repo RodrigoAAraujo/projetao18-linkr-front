@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import axios from 'axios';
-import { AuthContext } from './Global.js';
-import { BackendLink } from '../settings/urls.js';
+import { AuthContext } from '../Global.js';
+import { BackendLink } from '../../settings/urls.js';
 
 export default function LikeButton(props){
     const [liked, isLiked] = useState(false);
