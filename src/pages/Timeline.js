@@ -10,7 +10,6 @@ import { TfiReload } from 'react-icons/tfi/index.js';
 import useInterval from 'use-interval'
 import Post from "../components/Posts/Post.js"
 import TrendingContainer from "../components/TrendingContainer.js"
-import {TfiReload} from 'react-icons/tfi/index.js'
 import useInterval from 'use-interval'
 
 export default function Timeline() {
