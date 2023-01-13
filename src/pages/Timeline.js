@@ -7,16 +7,26 @@ import { AuthContext } from "../components/Global.js"
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js"
 import Post from "../components/Post.js"
+import { TfiReload } from 'react-icons/tfi/index.js';
+import useInterval from 'use-interval'
 
 export default function Timeline() {
     const [boolPublish, setBoolPublish] = useState(false)
     const [atualizador, setAtualizador] = useState(0)
     const [resposta, setResposta] = useState(null)
     const [link, setLink] = useState("")
-    const [commentary, setCommentary] = useState("")
+    const [comentary, setCommentary] = useState("")
     const navigate = useNavigate();
     const[user, setUser] = useContext(AuthContext)   
     const [render, setRender] = useState(false)
+
+    const [verificaTimeline, setVerificaTimeline] = useState(0)
+    const [contadorTimeline, setContadorTimeline] = useState(0) //primeiro use effect
+    const [boolTimeline, setBoolTimeline] = useState(false)
+    const [novaTimeline, setNovaTimeline] = useState([])
+    const [novosPosts, setNovosPosts] = useState(0)
+    
+
     
     useEffect(() => {
         if (localStorage.getItem("user")) {
@@ -25,7 +35,13 @@ export default function Timeline() {
             setUser(data)
 
             axios.get(`${BackendLink}timeline`, {headers: {Authorization: `Bearer ${data.token}`}} )
-                .then(res => setResposta(res.data))
+                .then(
+                    (res) => {
+                        
+                        setResposta(res.data[0]);
+                        setContadorTimeline(res.data[1].length)
+                    }
+                )
                 .catch(err => console.log(err))
         }else{
             navigate("/")
@@ -35,7 +51,7 @@ export default function Timeline() {
     function sendPost(e){
         e.preventDefault()
 
-        axios.post(`${BackendLink}timeline`, {link, commentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
+        axios.post(`${BackendLink}timeline`, {link, comentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
             .then(() => {
                 setRender(!render)
                 setLink("")
@@ -49,8 +65,57 @@ export default function Timeline() {
         navigate("/")
     }
 
+    useInterval(() => {
 
-    console.log(resposta)
+        console.log("ta chegando aqui")
+
+        axios.get(`${BackendLink}timeline`, { headers: { Authorization: `Bearer ${user.token}` } })
+            .then((res) => {
+
+                setVerificaTimeline(res.data[1].length);
+                setNovaTimeline(res.data[1])
+                console.log(verificaTimeline, "opa", contadorTimeline);
+                if ((verificaTimeline - contadorTimeline) === 0) {
+                    setBoolTimeline(false)
+                }
+
+                if (verificaTimeline > contadorTimeline) {
+                    console.log("novos posts detectados")
+                    setBoolTimeline(true)
+                    setNovosPosts(verificaTimeline - contadorTimeline)
+                }
+                
+                if ((verificaTimeline - contadorTimeline) === 0) {
+                    setBoolTimeline(false)
+                }
+
+            }
+            )
+            .catch(err => console.log(err))
+
+    }, 15000);
+
+    function atualizaTimeline(){
+       
+        if(verificaTimeline > 20){
+            //const length = verificaTimeline - 20;
+            //const lengthTimeline = verificaTimeline - length;
+            const novaResposta = novaTimeline.slice(0, 20);
+            setResposta(novaResposta)
+            setBoolTimeline(false)
+            setContadorTimeline(verificaTimeline)
+            return
+            }
+
+            setResposta(novaTimeline)
+            setBoolTimeline(false)
+            setContadorTimeline(verificaTimeline)
+        
+        
+        
+    }
+
+    
     return (
         <>
             <HeaderNavigation/>
@@ -64,13 +129,14 @@ export default function Timeline() {
                         <form onSubmit={(e) => sendPost(e)}>
                             <div>What are you going to share today?</div>
                             <LinkInput placeholder="http://..." required name="link" onChange={(e) => setLink(e.target.value)} value={link}/>
-                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={(e) => setCommentary(e.target.value)} value={commentary}/>
+                            <DescricaoInput placeholder="Awesome article about #javascript" name="description" onChange={(e) => setCommentary(e.target.value)} value={comentary}/>
                             <PublishButton type="submit" disabled={boolPublish}>
                                 {(boolPublish === false) ? "Publicar" : "Publicando..."}
                             </PublishButton>
                         </form>
                     </PostagemUsuario>
 
+                    <LoadButton  onClick={atualizaTimeline} boolTimeline = {boolTimeline}>{novosPosts} new posts, load more! <TfiReload className="reload"/></LoadButton>
                     {resposta?resposta.map((p) => 
                     <Post postInfo={{id: p.id,link: p.link,comentary: p.comentary}} 
                         userInfo={{username :p.username, image_url: p.image_url}} 
@@ -156,7 +222,6 @@ img{
     display: none;
 }
 `
-
 const Title = styled.p`
 font-family: 'Oswald';
 font-style: normal;
@@ -231,7 +296,24 @@ margin: 6px 0 0 0;
     height: 22px;
 }
 `
-
+const LoadButton = styled.button`
+width: 100%;
+height: 61px;
+background: #1877F2;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 16px;
+font-family: 'Lato';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+color: #FFFFFF;
+.reload{
+    margin-left: 8px;
+}
+margin-bottom: 20px;
+display: ${(props) => (props.boolTimeline===false ? "none" : "")};
+`
 
 
 

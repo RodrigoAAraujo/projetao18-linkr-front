@@ -22,7 +22,7 @@ export default function LikeButton(props){
             isLiked(r.data.userLikedThisPost)
             setListLikes(r.data.likes)
             setUserId(r.data.userId)
-            console.log(r.data)
+            
         })
     }
 

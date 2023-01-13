@@ -11,7 +11,7 @@ export default function Post({ postInfo, userInfo }) {
     const [linkMeta,setLinkData]= useState(null)
     const [user] = useContext(AuthContext)
 
-    console.log(postInfo)
+    
 
     const tagStyle = {
         color: '#FFFFFF',
@@ -26,7 +26,7 @@ export default function Post({ postInfo, userInfo }) {
         }
 
         axios.post(`${BackendLink}posts/links`, body ,{headers : {Authorization: `Bearer ${user.token}`}})
-            .then(res => {setLinkData(res.data); console.log(res.data)})
+            .then(res => {setLinkData(res.data);})
             .catch(err => console.log(err))
 
     },[postInfo])
