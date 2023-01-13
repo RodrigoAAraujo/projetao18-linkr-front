@@ -1,27 +1,26 @@
 import { useState } from "react"
+import { AiOutlineComment} from 'react-icons/ai/index.js';
 import styled from "styled-components"
-import CommentaryButton from "../components/Comments/ComentaryButton.js"
 import ComentaryTab from "../components/Comments/ComentaryTab.js";
 
 export default function TestPage() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
+    const comments = ["nossa que bom", "ficou top", "parabens"]
 
     return(
         <Container>
-            {(isOpen 
-            ?
-            <> 
             <Post>
-                <CommentaryButton onClick={() => {setIsOpen(!isOpen);console.log("abriu")}}/>
-                <ComentaryTab/>
+                <CommentaryButton onClick={() => setIsOpen(!isOpen)}>
+                    <AiOutlineComment/>
+                    <a>{comments.length} comments</a>
+                </CommentaryButton>
             </Post>
-            
-            </>
+            {isOpen 
+            ?
+               <ComentaryTab/> 
             :
-            <Post>
-                <CommentaryButton onClick={() => {setIsOpen(!isOpen);console.log("abriu")}}/>
-            </Post> 
-            )}
+                null
+            }
         </Container>
     )
 }
@@ -29,6 +28,7 @@ export default function TestPage() {
 const Container = styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
 `
 
 const Post = styled.div`
@@ -37,5 +37,30 @@ const Post = styled.div`
     height: 276px;
     background: #171717;
     border-radius: 16px;
-    z-index: 10;
+`
+
+const CommentaryButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    svg{
+        font-size: 30px;
+        color: #FFFFFF;
+        margin-top: 5px;
+    }
+    p{
+        font-family: 'Lato', sans-serif;
+        font-size: 11px;
+        line-height: 13px;
+        color: #FFFFFF;
+         
+    }
+    a{
+        font-family: 'Lato', sans-serif;
+        font-size: 11px;
+        line-height: 13px;
+        color: #FFFFFF; 
+   
+    }
 `
