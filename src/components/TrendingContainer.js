@@ -38,7 +38,7 @@ const Container = styled.div`
     margin-top: 100px;
     color: #FFFFFF;
 
-    @media (max-width: 735px){
+    @media (max-width: 960px){
         display: none;
     }
 

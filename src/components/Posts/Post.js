@@ -9,6 +9,7 @@ import { FaPencilAlt } from "react-icons/fa/index.esm.js";
 import { FaTrash } from "react-icons/fa/index.esm.js";
 import ConfirmationScreen from "../ConfirmationScreen.js";
 import { useNavigate } from "react-router";
+import EditPost from "./EditPost.js";
 
 export default function Post({ postInfo, userInfo, renderer}) {
 
@@ -17,6 +18,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
     const [mine, setMine] = useState(false)
     const [confirmation, setConfirmation] = useState(false)
     const navigate = useNavigate();
+    const [edit, setEdit] = useState(false)
 
     const tagStyle = {
         color: '#FFFFFF',
@@ -52,7 +54,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
                     <h3>{userInfo.username}</h3>
                     {mine?
                         <div>
-                            <FaPencilAlt/>
+                            <FaPencilAlt onClick= {() => setEdit(true)}/>
                             <FaTrash onClick={() => setConfirmation(true)}/>
                         </div>: 
                     null}
@@ -61,6 +63,11 @@ export default function Post({ postInfo, userInfo, renderer}) {
                 <ReactTagify tagStyle={tagStyle} tagClicked={(tag)=> navigate(`/hashtag/${tag.slice(1)}`)}>
                     {postInfo.comentary}
                 </ReactTagify>
+
+                {edit?
+                <EditPost edit={setEdit} postId={postInfo.id} render={renderer}/>
+                : null}
+
                 {linkMeta === null? null :
                     <LinkInfo>
                         <a href={linkMeta.url} target="_blank">
@@ -111,7 +118,8 @@ const PostStyle = styled.div`
     .post{
         color: #B7B7B7;
 
-        width: 100%;
+        width: 87%;
+        max-width: 87%;
         h3{
             font-size: 17px;
             font-weight: 400;
@@ -121,6 +129,7 @@ const PostStyle = styled.div`
             display: flex;
             justify-content: space-between;
             margin-bottom: 7px;
+            width: 100%;
 
             svg{
                 cursor: pointer;
