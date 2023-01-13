@@ -2,12 +2,10 @@ import { AiOutlineComment} from 'react-icons/ai/index.js';
 import styled from 'styled-components';
 
 export default function CommentaryButton() {
-    const comments = ["nossa que bom", "ficou top", "parabens"]
-
     return(
         <CommentaryDiv>
             <AiOutlineComment/>
-            <a>{comments.length} comments</a>
+            <a>comments</a>
         </CommentaryDiv>
     )
 }

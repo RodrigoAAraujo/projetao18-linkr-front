@@ -17,7 +17,7 @@ export default function TestPage() {
             </Post>
             {isOpen 
             ?
-               <ComentaryTab/> 
+               <ComentaryTab post_id={5}/> 
             :
                 null
             }
@@ -29,11 +29,13 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+    max-width: 735px;
 `
 
 const Post = styled.div`
     background-color: #171717;
-    width: 90vw;
+    width: 100%;
     height: 276px;
     background: #171717;
     border-radius: 16px;

@@ -54,7 +54,6 @@ export default function Timeline() {
     }
 
 
-    console.log(resposta)
     return (
         <>
             <HeaderNavigation/>

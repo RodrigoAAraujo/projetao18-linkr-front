@@ -8,6 +8,8 @@ import LikeButton from "./LikeButton.js";
 import { FaPencilAlt } from "react-icons/fa/index.esm.js";
 import { FaTrash } from "react-icons/fa/index.esm.js";
 import ConfirmationScreen from "../ConfirmationScreen.js";
+import ComentaryTab from "../Comments/ComentaryTab.js";
+import CommentaryButton from "../Comments/ComentaryButton.js";
 
 export default function Post({ postInfo, userInfo, renderer}) {
 
@@ -15,8 +17,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
     const [user] = useContext(AuthContext)
     const [mine, setMine] = useState(false)
     const [confirmation, setConfirmation] = useState(false)
-
-    console.log(postInfo)
+    const [isOpen, setIsOpen] = useState(true);
 
     const tagStyle = {
         color: '#FFFFFF',
@@ -31,7 +32,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
         }
 
         axios.post(`${BackendLink}posts/links`, body ,{headers : {Authorization: `Bearer ${user.token}`}})
-            .then(res => {setLinkData(res.data); console.log(res.data)})
+            .then(res => {setLinkData(res.data)})
             .catch(err => console.log(err))
 
         if(userInfo.username === user.username){
@@ -46,6 +47,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
             <div className="user-likes">
                 <img src={userInfo.image_url} />
                 <LikeButton postId={postInfo.id}/>
+                <CommentaryButton onClick={() => {setIsOpen(!isOpen);alert("apertou")}} />
             </div>
             <div className="post">
                 <section>
@@ -73,6 +75,13 @@ export default function Post({ postInfo, userInfo, renderer}) {
                     </LinkInfo>
                 }
             </div>
+            {isOpen 
+            ?
+               <ComentaryTab postId={postInfo.id}/> 
+            :
+                null
+            }
+            
             {confirmation? <ConfirmationScreen back={setConfirmation} postId={postInfo.id} render={renderer}/>: null}
         </PostStyle>
     )
