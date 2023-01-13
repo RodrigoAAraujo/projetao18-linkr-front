@@ -26,11 +26,11 @@ export default function HashtagPage() {
         if (localStorage.getItem("user")) {
             const data = JSON.parse(localStorage.getItem("user"));
             setUser(data);
-            axios.get(`${BackendLink}timeline`, {headers: {Authorization: `Bearer ${data.token}`}} )
+            axios.get(`${BackendLink}trending/${hashtag}`, {headers: {Authorization: `Bearer ${data.token}`}} )
                 .then(res => setResposta(res.data))
                 .catch(err => console.log(err))
         }else{
-            navigate("/")
+            navigate("/");
         };
     }, [render])
 
