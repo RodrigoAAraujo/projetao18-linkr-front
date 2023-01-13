@@ -32,8 +32,6 @@ export default function UsersPosts() {
         ]
     }*/
 
-
-    console.log(user)
     useEffect(() => {
         if (localStorage.getItem("user")) {
             const data = JSON.parse(localStorage.getItem("user"))
