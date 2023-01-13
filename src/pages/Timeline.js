@@ -6,9 +6,8 @@ import { useContext } from "react"
 import { AuthContext } from "../components/Global.js"
 import axios from "axios";
 import { BackendLink } from "../settings/urls.js"
-import Post from "../components/Post.js"
-import { TfiReload } from 'react-icons/tfi/index.js';
-import useInterval from 'use-interval'
+import Post from "../components/Posts/Post.js"
+import TrendingContainer from "../components/TrendingContainer.js"
 
 export default function Timeline() {
     const [boolPublish, setBoolPublish] = useState(false)
@@ -51,13 +50,17 @@ export default function Timeline() {
     function sendPost(e){
         e.preventDefault()
 
+        setBoolPublish(true)
+
         axios.post(`${BackendLink}timeline`, {link, comentary} ,{headers: {Authorization: `Bearer ${user.token}`}})
             .then(() => {
+                console.log("boa")
                 setRender(!render)
                 setLink("")
                 setCommentary("")
+                setBoolPublish(false)
             })
-            .catch(console.log("nop"))
+            .catch(() => setBoolPublish(false))
 
     }
 
@@ -140,9 +143,11 @@ export default function Timeline() {
                     {resposta?resposta.map((p) => 
                     <Post postInfo={{id: p.id,link: p.link,comentary: p.comentary}} 
                         userInfo={{username :p.username, image_url: p.image_url}} 
+                        renderer={{render, setRender}}
                     />): null}
                     
                 </EnglobaConteudo>
+                <TrendingContainer/>
             </Container>
         </>
     )
@@ -153,9 +158,8 @@ export default function Timeline() {
 const Container = styled.div`
 width: 100%;
 display: flex;
-flex-direction: column;
-align-items: center;
-padding-top: 71px;
+justify-content: center;
+padding-top: 53px;
 background-color: #333333;
 @media (max-width: 735px){
     padding-top: 0;
@@ -193,7 +197,6 @@ flex-direction: column;
 `
 const PostagemUsuario = styled.div`
 margin-bottom: 30px;
-height: 280px;
 width: 100%;
 background: #FFFFFF;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -213,6 +216,7 @@ padding: 18px;
 const EnglobaFotoUsuario = styled.div`
 height: 100%;
 width: 50px;
+margin-right: 18px;
 img{
     height: 50px;
     width: 50px;
@@ -260,6 +264,7 @@ margin-top: 2%;
 `
 const DescricaoInput = styled.textarea`
 width: 100%;
+max-width: 100%;
 height: 100px;
 background: #EFEFEF;
 border-radius: 5px;
@@ -292,28 +297,13 @@ border: none;
 color: white;
 cursor: pointer;
 margin: 6px 0 0 0;
+align-self: flex-end;
 @media (max-width: 735px){
     height: 22px;
 }
 `
-const LoadButton = styled.button`
-width: 100%;
-height: 61px;
-background: #1877F2;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 16px;
-font-family: 'Lato';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-color: #FFFFFF;
-.reload{
-    margin-left: 8px;
-}
-margin-bottom: 20px;
-display: ${(props) => (props.boolTimeline===false ? "none" : "")};
-`
+export {Container, EnglobaConteudo, Title};
+
 
 
 
