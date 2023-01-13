@@ -33,7 +33,7 @@ export default function Post({ postInfo, userInfo, renderer}) {
         }
 
         axios.post(`${BackendLink}posts/links`, body ,{headers : {Authorization: `Bearer ${user.token}`}})
-            .then(res => {setLinkData(res.data); console.log(res.data)})
+            .then(res => {setLinkData(res.data);})
             .catch(err => console.log(err))
 
         if(userInfo.username === user.username){
