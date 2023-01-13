@@ -1,2 +1,2 @@
-export const BackendLink = "http://localhost:5000/"
+export const BackendLink = "https://linkr-back.onrender.com/"
 
